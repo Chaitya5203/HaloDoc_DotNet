@@ -1,0 +1,310 @@
+@{
+    ViewData["Title"] = "patientdashboard Page";
+}
+<nav class="bg-white">
+    <div class="container-fluid shadow">
+        <ul>
+            <li>
+                <img src="~/OneDrive_2024-01-17/SRS Screen Shorts/backremovelogo.png" alt="" height="100px" width="180">
+            </li>
+            <li class="hideonmobile me-2">Welcome <b> Test Testing</b></li>
+            <li><a asp-controller="Home" asp-action="patientlogin"><button class="btn hideonmobile me-2"
+                        style="border:2px solid #54d4d3; color: #54d4d3;">Logout</button></a></li>
+            <li>
+                <a asp-controller="Home" asp-action="patientlogin">
+                    <button class="btn showonmobile hide me-2"
+                        style="border:2px solid #54d4d3;"><i class="fa-solid fa-arrow-right-from-bracket"
+                            style="color: #54d4d3;"></i></button></a></li>
+            <li><button class="moonbtn backtra me-2"><i class="fa-solid fa-moon  "></i></button></li>
+        </ul>
+        <hr>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active border-0 text-muted" id="home-tab" data-bs-toggle="tab"
+                    data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                    aria-selected="true"><b>Dashboard</b></button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link text-muted border-0 " id="profile-tab" data-bs-toggle="tab"
+                    data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
+                    aria-selected="false"><b>Profile</b></button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Here I Want To Create New Request For ...
+            </div>
+            <div class="modal-body text-center">
+                <button class="btn btn-info text-white">Me</button>
+                <button class="btn btn-white" style="border-color: #54d4d3; color: #54d4d3;">Some One Else</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info text-white">Continue</button>
+                <button type="button" class="btn btn-white" style="border-color: #54d4d3; color: #54d4d3;"
+                    data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="container mt-3 ">
+            <h3>Medical History</h3>
+            <div class="container hideonmobile bg-white rounded shadow mt-3 p-0">
+                <div class="row pt-3 pb-3">
+                    <div class="col text-end">
+                        <button class="btn btn-white me-3" style="border-color: #54d4d3; color: #54d4d3;"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Create New Request
+                        </button>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr class="bg-light h-100">
+                            <th scope="col">Created Date <i class="fa fa-arrow-down" aria-hidden="true"></i></th>
+                            <th scope="col">Current Status</th>
+                            <th scope="col">Document</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-muted">
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Accepted</td>
+                            <td><button class="btn btn-white" style="border-color: #54d4d3; color: #54d4d3;">
+                                    Document
+                                </button></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Processing</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Processing</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Processing</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Processing</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Clear</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Closed</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Cancelled By Admin</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Block Request</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Feb 05,2023</td>
+                            <td>Cancelled By Admin</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container showonmobile hide rounded shadow mb-3  ">
+                <div class="row pt-3 pb-3 bg-white">
+                    <div class="col text-end ">
+                        <button class="btn btn-white me-3 " data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            style="border-color: #54d4d3; color: #54d4d3;">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="accordion" style="background-color: #54d4d3;" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingEight">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingNine">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTen">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                <b>Created Date: </b> Feb 05,2023
+                            </button>
+                        </h2>
+                        <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>Provider</p>
+                                <p>Current Status</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        dsfhgvfdsui
+        <!-- Button trigger modal -->
+
+    </div>
+</div>
+
+<footer class="text-center justify-content-center bg-secondary mt-2 ">
+    <div class="">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
+</footer>

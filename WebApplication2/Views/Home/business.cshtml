@@ -1,0 +1,134 @@
+@{
+    ViewData["Title"] = "business Page";
+}
+<header id="hearder" class="shadow bg-white w-100 top-0">
+    <div class="row mx-0">
+        <div class="col mx-0">
+            <img src="~/OneDrive_2024-01-17/SRS Screen Shorts/backremovelogo.png" alt="" height="100px" width="180">
+        </div>
+    </div>
+    <div class="col setmoon">
+        <div class="row">
+            <div class="col text-end  ">
+                <button class="moonbtn backtra">
+                    <i class="fa-solid fa-moon  "></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container text-end mt-3">
+    <a class="text-start text-info text-decoration-none " asp-controller="Home" asp-action="submit_request_screen">
+        <button class="btn btn-white  text-info border-info rounded ">
+            <i class="fa-solid  fa-less-than"></i> Back
+        </button>
+    </a>
+</div>
+<form asp-action="CreatePatientByBusiness" asp-controller="Aspnetusers">
+    <div class="container bg-white rounded shadow mt-3">
+        <!-- <div class="row text-end position-relative ">
+            <div class="col d-md-flex justify-content-md-end">
+                <button class="btn btn-white  text-white border-info rounded ">
+                    <a class="col text-start text-info text-decoration-none " href="./submitrequestScreen.html">
+                        <i class="fa-solid  fa-less-than"></i> Back
+                    </a>
+                </button>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-12 h3 mb-3 mt-3">
+                Business Information
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Your First name</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Your last name </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="phone" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4"> Your Email</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="business_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Business/Property Name</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="case_no" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Case Number(Optional) </label>
+            </div>
+            <div class="col-12 h3 mb-3 mt-3">
+                Patient Information
+            </div>
+            <div class="col-sm-12 col-md-12 col-xl-12 form-floating mb-3 text-muted">
+                <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
+            <textarea name="symptoms" class="form-control " id="exampleFormControlTextarea1" rows="6"
+                          placeholder="Enter Brief Details Of Symptoms"></textarea>
+                <label for="exampleFormControlInput1" class="form-label ps-4">Enter Brief Details Of Symptoms</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="p_first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">First name</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="p_last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">last name </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="dob" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Date Of Birth</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 h3 mb-3">
+                Patient Contact Information
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="p_email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Email</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+            <input name="p_phone" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 h3 mb-3">
+                Patient Location
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating  mb-3 text-muted">
+            <input name="p_street" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Street</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+            <input name="p_city" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">City</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+            <input name="p_state" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">State</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+            <input name="p_zip_code" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Zip Code</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Room # / (Suite Optional)</label>
+            </div>
+        </div>
+        <div class="text-end d-md-flex justify-content-md-end pb-3">
+            <button class="btn btn-info me-2 text-white" type="submit">Submit</button>
+            <button class="btn btn-white text-info border-info" type="reset">cancel</button>
+        </div>
+    </div>
+</form>
+<footer class="text-center justify-content-center bg-black mt-2 ">
+    <div class="text-white">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
+</footer>
