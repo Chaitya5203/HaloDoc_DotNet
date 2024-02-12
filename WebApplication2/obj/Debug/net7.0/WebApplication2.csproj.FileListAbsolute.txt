@@ -462,3 +462,4 @@ C:\Users\pce96\source\repos\WebApplication2 - Copy\WebApplication2\obj\Debug\net
 C:\Users\pce96\source\repos\WebApplication2 - Copy\WebApplication2\obj\Debug\net7.0\WebApplication2.pdb
 C:\Users\pce96\source\repos\WebApplication2 - Copy\WebApplication2\obj\Debug\net7.0\WebApplication2.genruntimeconfig.cache
 C:\Users\pce96\source\repos\WebApplication2 - Copy\WebApplication2\obj\Debug\net7.0\ref\WebApplication2.dll
+C:\Users\pce96\source\repos\WebApplication2 - Copy\WebApplication2\obj\Debug\net7.0\WebApplication2.sourcelink.json

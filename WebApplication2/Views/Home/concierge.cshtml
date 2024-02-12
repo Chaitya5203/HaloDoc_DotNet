@@ -1,4 +1,4 @@
-@model WebApplication2.Data.Concierge
+@model WebApplication2.Models.ConciergePatientRequest
 @{
     ViewData["Title"] = "concierge Page";
 }
@@ -115,12 +115,24 @@
                 Patient Contact Information
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="pemail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="pemail" type="email" class="form-control" onchange="emailExists()" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Email</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
                 <input name="pphonenumber" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" style="display:none;" id="pwd_div">
+                <input asp-for=password name="password" type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Password</label>
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" style="display:none;" id="con_pwd_div">
+                <input asp-for=cpassword name="confirmpassword" type="password" class="form-control" id="exampleFormControlInput1" placeholder="confirm password">
+                <label for="exampleFormControlInput1" class="form-label ps-4">confirm password</label>
+                <span asp-validation-for="cpassword" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
@@ -141,3 +153,24 @@
 <footer class="text-center justify-content-center bg-black mt-2 ">
     <div class="text-white">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
 </footer>
+<script>
+    function emailExists() {
+        var email = document.getElementById("email").value;
+        fetch('/Home/patient/' + email)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                if (!data.exists) {
+                    document.getElementById('pwd_div').style.display = 'block';
+                    document.getElementById('con_pwd_div').style.display = 'block';
+                }
+                else {
+                    document.getElementById('pwd_div').style.display = 'none';
+                    document.getElementById('con_pwd_div').style.display = 'none';
+                }
+
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>

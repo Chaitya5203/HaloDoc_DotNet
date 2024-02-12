@@ -19,5 +19,7 @@
         public string? p_state { get; set; }
         public string? p_zip_code { get; set; }
         public DateTime Createddate { get; set; } = DateTime.Now;
+        public string password { get; set; } = null!;
+        public string cpassword { get; set; } = null!;
     }
 }

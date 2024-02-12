@@ -63,8 +63,9 @@
             <div class="form-floating mb-3">
                 <input asp-for="Passwordhash" type="password" id="myInput"  class="form-control backtra border-info text-muted" id="floatingPassword"
                        placeholder="Password">
-                <label asp-for="Passwordhash" class="  " for="floatingPassword">Password</label>
-                <i class="far fa-eye text-secondary faicon" onclick="myFunction()"></i>
+                <label asp-for="Passwordhash" for="floatingPassword">Password</label>
+                <i class="far fa-eye text-secondary faicon" style="display:none" id="showeye" onclick="myFunction()"></i>
+                <i class="fa-solid fa-eye-slash faicon text-secondary" id="hideeye" style="display:block" onclick="myFunction()"></i>
            </div>
             <div class="row justify-content-between mt-4">
                 <div class="col">
@@ -72,8 +73,8 @@
                 </div>
             </div>
             <div class="row-sm-10 mt-4 text-muted mb-5">
-                <a class="col text-center text-info text-decoration-none " asp-controller="patientlogin" asp-action="patientforgot">
-                    Forgot Password?
+                <a class="col text-center text-info text-decoration-none " asp-controller="Home" asp-action="patientforgot">
+                    Forgot Password?    
                 </a>
             </div>
         </form> 
@@ -88,8 +89,12 @@
         var x = document.getElementById("myInput");
         if (x.type === "password") {
             x.type = "text";
+            document.getElementById('showeye').style.display = 'block';
+            document.getElementById('hideeye').style.display = 'none';
         } else {
             x.type = "password";
+            document.getElementById('hideeye').style.display = 'block';
+            document.getElementById('showeye').style.display = 'none';
         }
     }
 </script>

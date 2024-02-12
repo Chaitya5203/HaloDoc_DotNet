@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +28,6 @@ namespace WebApplication2.Controllers
                           View(await _context.Aspnetusers.ToListAsync()) :
                           Problem("Entity set 'ApplicationContext.Aspnetusers'  is null.");
         }
-
         // GET: Aspnetusers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,14 +45,25 @@ namespace WebApplication2.Controllers
 
             return View(aspnetuser);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatient(Userdata info)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("../Home/patient",info);
+            }
+            Aspnetuser aspuser = new Aspnetuser
+            {
+                Usarname = info.first_name,
+                Passwordhash = info.last_name,
+                Email = info.email,
+                Createddate = info.Createddate
+            };
+            _context.Aspnetusers.Add(aspuser);
+            await _context.SaveChangesAsync();
             User user = new User
             {
-
                 Firstname = info.first_name,
                 Lastname = info.last_name,
                 Email = info.email,
@@ -59,24 +71,42 @@ namespace WebApplication2.Controllers
                 Street = info.street,
                 City = info.city,
                 State = info.state,
-                Aspnetuserid = 1,
+                Aspnetuserid =aspuser.Id,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
-            Aspnetuser aspuser = new Aspnetuser
-            {
-                Id = 1,
-                Usarname = info.first_name,
-                Passwordhash = info.last_name,
-                Email = info.email,
-                Createddate = info.Createddate
-            };
-            _context.Aspnetusers.Add(aspuser);
             _context.Users.Add(user);
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            Request request = new Request
+            {
+                Requesttypeid = 1,
+                Isurgentemailsent = new BitArray(1, false),
+                Status = 1,
+                Firstname = info.first_name,
+                Lastname = info.last_name,
+                Email = info.email,
+                Phonenumber = info.phonenumber,
+                Createddate = info.Createddate,
+            };
+            _context.Requests.Add(request);
+            await _context.SaveChangesAsync();
+
+            Requestclient requestclient = new Requestclient
+            {
+                Requestid = request.Requestid,
+                Firstname = info.first_name,
+                Lastname = info.last_name,
+                Email = info.email,
+                Phonenumber= info.phonenumber,
+                Regionid = 1,
+                Street = info.street,
+                City = info.city,
+                Zipcode = info.zipcode
+            };
+            _context.Requestclients.Add(requestclient);
+            await _context.SaveChangesAsync();  
             return RedirectToAction(nameof(patientlogin), "Home");
         }
-
         //Businesss Data Store 
 
         [HttpPost]
@@ -84,6 +114,15 @@ namespace WebApplication2.Controllers
 
         public async Task<IActionResult> CreatePatientByBusiness(BusinessPatientRequest info)
         {
+            Aspnetuser aspuser = new Aspnetuser
+            {
+                Usarname = info.first_name,
+                Passwordhash = info.last_name,
+                Email = info.email,
+                Phonenumber = info.phone,
+            };
+            _context.Aspnetusers.Add(aspuser);
+            _context.SaveChanges();
             User user = new User
             {
                 Firstname = info.p_first_name,
@@ -93,20 +132,97 @@ namespace WebApplication2.Controllers
                 Street = info.p_street,
                 City = info.p_city,
                 State = info.p_state,
-                Aspnetuserid = 2,
+                Aspnetuserid = aspuser.Id,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
-            Aspnetuser aspuser = new Aspnetuser
-            {
-                Usarname = info.first_name,
-                Passwordhash = info.last_name,
-                Email = info.email,
-                Phonenumber = info.phone,
-            };
-            _context.Aspnetusers.Add(aspuser);
             _context.Users.Add(user);
             _context.SaveChanges();
+            Request request = new Request
+            {
+                Requesttypeid = 1,
+                Isurgentemailsent = new BitArray(1, false),
+                Status = 1,
+                Firstname = info.first_name,
+                Lastname = info.last_name,
+                Email = info.email,
+                Phonenumber = info.phone,
+                Createddate = info.Createddate,
+            };
+            _context.Requests.Add(request);
+            await _context.SaveChangesAsync();  
+            Requestclient requestclient = new Requestclient
+            {
+                Requestid = request.Requestid,
+                Firstname = info.p_first_name,
+                Lastname = info.p_last_name,
+                Email = info.p_email,
+                Phonenumber = info.p_phone,
+                Regionid = 1,
+                Street = info.p_street,
+                City = info.p_city,
+                Zipcode = info.p_zip_code
+            };
+            _context.Requestclients.Add(requestclient); 
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(patientlogin), "Home");
+        }
+        /// Family Friend
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePatientByFamilyFriend(FamilyFriendPatientRequest info)
+        {
+            Aspnetuser aspuser = new Aspnetuser
+            {
+                Usarname = info.p_first_name,
+                Passwordhash = info.p_last_name,
+                Email = info.p_email,
+                Phonenumber = info.p_phonenumber
+            };
+            _context.Aspnetusers.Add(aspuser);
+            _context.SaveChanges();
+            Request request = new Request
+            {
+                Requesttypeid =1,
+                Isurgentemailsent= new BitArray(1, false),
+                Status=1,
+                Firstname =info.f_first_name,
+                Lastname =info.f_last_name,
+                Email = info.f_email,
+                Phonenumber = info.f_phone_number,
+                Createddate= info.Createddate,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
+            User user = new User
+            {
+                Firstname = info.p_first_name,
+                Lastname = info.p_last_name,
+                Email = info.p_email,
+                Mobile = info.p_phonenumber,
+                Street = info.p_street,
+                City = info.p_city,
+                State = info.p_state,
+                Aspnetuserid = aspuser.Id,
+                Createdby = info.Createddate.ToShortDateString(),
+                Createddate = info.Createddate
+            };
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            Requestclient requestclient = new Requestclient
+            {
+                Requestid = request.Requestid,
+                Firstname = info.p_first_name,
+                Lastname = info.p_last_name,
+                Email = info.f_email,
+                Phonenumber = info.p_phonenumber,
+                Regionid = 1,
+                Street = info.p_street,
+                City = info.p_city,
+                Zipcode = info.p_zip
+            };
+            _context.Requestclients.Add(requestclient);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(patientlogin), "Home");
         }
         // Concierge Data Store 
@@ -124,6 +240,8 @@ namespace WebApplication2.Controllers
                 State = info.cstate,
                 Createddate = info.Createddate
             };
+            _context.Concierges.Add(c);
+            await _context.SaveChangesAsync();
             Aspnetuser aspuser = new Aspnetuser
             {
                 Usarname = info.first_name,
@@ -131,6 +249,8 @@ namespace WebApplication2.Controllers
                 Email = info.pemail,
                 Phonenumber = info.Phonenumber,
             };
+            _context.Aspnetusers.Add(aspuser);
+            await _context.SaveChangesAsync();
             User user = new User
             {
                 Firstname = info.first_name,
@@ -140,15 +260,54 @@ namespace WebApplication2.Controllers
                 Street = info.Street,
                 City = info.City,
                 State = info.State,
-                Aspnetuserid = 2,
+                Aspnetuserid = aspuser.Id,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
-            _context.Aspnetusers.Add(aspuser);
-            _context.Concierges.Add(c);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+
+            Request request = new Request
+            {
+                Requesttypeid = 1,
+                Isurgentemailsent = new BitArray(1, false),
+                Status = 1,
+                Firstname = info.cname,
+                Lastname = info.clname,
+                Email = info.cemail,
+                Phonenumber = info.cphone,
+                Createddate = info.Createddate,
+            };
+            _context.Requests.Add(request);
+            await _context.SaveChangesAsync();
+            Requestclient requestclient = new Requestclient
+            {
+                Requestid = request.Requestid,
+                Firstname = info.first_name,
+                Lastname = info.last_name,
+                Email = info.pemail,
+                Phonenumber = info.Phonenumber,
+                Regionid = 1,
+                Street = info.Street,
+                City = info.City,
+                Zipcode = info.p_zip_code
+            };
+            _context.Requestclients.Add(requestclient);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(patientlogin), "Home");
+        }
+
+
+        [Route("/Home/patient/{email}")]
+        [Route("/Home/business/{email}")]
+        [Route("/Home/familyfriend/{email}")]
+        [Route("/Home/concierge/{email}")]
+
+        [HttpGet]
+        public IActionResult CheckEmailExists(string email)
+        {
+            var emailExists = _context.Aspnetusers.Any(u => u.Email == email);
+            return Json(new { exists = emailExists });
         }
         // GET: Aspnetusers/Create
         public IActionResult Create()
@@ -164,7 +323,6 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-
         // GET: Aspnetusers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -196,7 +354,6 @@ namespace WebApplication2.Controllers
             }
             return View(aspnetuser);
         }
-
         // POST: Aspnetusers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -208,7 +365,6 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try

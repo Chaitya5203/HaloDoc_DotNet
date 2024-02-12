@@ -1,3 +1,5 @@
+@model WebApplication2.Models.FamilyFriendPatientRequest
+
 @{
     ViewData["Title"] = "familyfriend Page";
 }
@@ -25,7 +27,7 @@
         </button>
     </a>
 </div>
-<form action="">
+<form asp-action="CreatePatientByFamilyFriend" asp-controller="Aspnetusers">
     <div class="container bg-white rounded shadow mt-3">
         <!-- <div class="row text-end position-relative ">
             <div class="col d-md-flex justify-content-md-end">
@@ -41,23 +43,23 @@
                 Family / Friend Information
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="f_first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Your First name</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input name="f_last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Your last name </label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input name="f_phone_number" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="f_email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4"> Your Email</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input name="f_relation" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Relation With Patient </label>
             </div>
             <div class="col-12 h3 mb-3 mt-3">
@@ -73,15 +75,15 @@
                 </label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="p_first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">First name</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input name="p_last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">last name </label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
+                <input name="p_dob" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Date Of Birth</label>
             </div>
         </div>
@@ -90,12 +92,24 @@
                 Patient Contact Information
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="p_email" type="email" class="form-control" id="exampleFormControlInput1" onchange="emailExists()" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Email</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input name="p_phonenumber" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" style="display:none;" id="pwd_div">
+                <input asp-for=password name="password" type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
+                <label for="exampleFormControlInput1" class="form-label ps-4">Password</label>
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" style="display:none;" id="con_pwd_div">
+                <input asp-for=cpassword name="confirmpassword" type="password" class="form-control" id="exampleFormControlInput1" placeholder="confirm password">
+                <label for="exampleFormControlInput1" class="form-label ps-4">confirm password</label>
+                <span asp-validation-for="cpassword" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
@@ -103,32 +117,40 @@
                 Patient Location
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating  mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="p_street" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Street</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="p_city" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">City</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="p_state" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">State</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="p_zip" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Zip Code</label>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input name="p_room" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Room # / (Suite Optional)</label>
             </div>
         </div>
-        <div class="row">
+        <div class="row">   
             <div class="col h3 mb-3">
                 (Optional) Upload Photo or Document
             </div>
         </div>
-        <div class="row">
+        <fieldset id="upload">
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="inputGroupFile02">
+                <label class="input-group-text" for="inputGroupFile02">
+                    <i class="fa-solid fa-cloud-arrow-up"> Upload</i>
+                </label>
+            </div>
+        </fieldset>
+@*         <div class="row">
             <div class="col mb-3">
                 <input class="form-control visually-hidden" type="file" id="formFile">
                 <label for="formFile" class="bg-light rounded d-flex w-100  justify-content-between border"
@@ -143,14 +165,35 @@
                 </label>
 
             </div>
-        </div>
+        </div> *@
         <i class="fa-solid fa-cloud-arrow-up" style="color: #ffffff;"></i>
         <div class="text-end d-md-flex justify-content-md-end pb-3">
-            <button class="btn btn-info me-2 text-white" type="button">Submit</button>
-            <button class="btn btn-white text-info border-info" type="button">cancel</button>
+            <button class="btn btn-info me-2 text-white" type="submit">Submit</button>
+            <button class="btn btn-white text-info border-info" type="reset">cancel</button>
         </div>
     </div>
 </form>
 <footer class="text-center justify-content-center bg-black mt-2 ">
     <div class="text-white">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
 </footer>
+<script>
+    function emailExists() {
+        var email = document.getElementById("email").value;
+        fetch('/Home/patient/' + email)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                if (!data.exists) {
+                    document.getElementById('pwd_div').style.display = 'block';
+                    document.getElementById('con_pwd_div').style.display = 'block';
+                }
+                else {
+                    document.getElementById('pwd_div').style.display = 'none';
+                    document.getElementById('con_pwd_div').style.display = 'none';
+                }
+
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>

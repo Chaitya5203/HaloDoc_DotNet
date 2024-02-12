@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using WebApplication2.Data;
 using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
@@ -7,17 +9,18 @@ namespace WebApplication2.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();
@@ -29,6 +32,40 @@ namespace WebApplication2.Controllers
         public IActionResult patient()
         {
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> patient(Userdata info)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            /*Aspnetuser aspuser = new Aspnetuser
+            {
+                Usarname = info.first_name,
+                Passwordhash = info.last_name,
+                Email = info.email,
+                Createddate = info.Createddate
+            };
+            _context.Aspnetusers.Add(aspuser);
+            await _context.SaveChangesAsync();
+            User user = new User
+            {
+                Firstname = info.first_name,
+                Lastname = info.last_name,
+                Email = info.email,
+                Mobile = info.phonenumber,
+                Street = info.street,
+                City = info.city,
+                State = info.state,
+                Aspnetuserid = aspuser.Id,
+                Createdby = info.Createddate.ToShortDateString(),
+                Createddate = info.Createddate
+            };
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();*/
+            return RedirectToAction(nameof(patientlogin), "Home");
         }
         public IActionResult business()
         {
@@ -50,12 +87,10 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        public IActionResult patientdashboard()
+        public async Task<IActionResult> patientdashboard()
         {
-            return View();
+            return _context.Requests != null ? View(await _context.Requests.ToListAsync()) : Problem("No data");
         }
-
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

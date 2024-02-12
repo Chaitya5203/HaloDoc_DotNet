@@ -3,6 +3,9 @@
     public class ConciergePatientRequest
     {
         public string cname { get; set; } = null!;
+        public string? clname { get; set; }
+        public string? cemail { get; set; }
+        public string? cphone { get; set; }
         public string cstreet { get; set; } = null!;
         public string ccity { get; set; } = null!;
         public string cstate { get; set; } = null!;
@@ -16,5 +19,8 @@
         public string? Street { get; set; }
         public string? City { get; set; }
         public string? State { get; set; }
+        public string? p_zip_code { get; set; }
+        public string password { get; set; } = null!;
+        public string cpassword { get; set; } = null!;
     }
 }
