@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "concierge Page";
 }
-
 <header id="hearder" class="shadow bg-white w-100 top-0">
     <div class="row mx-0">
         <div class="col mx-0">
@@ -43,20 +42,24 @@
                 Concierge Information
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="cname" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=cname name="cname" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Your First name</label>
+                <span asp-validation-for="cname" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="clastname" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input asp-for=clname type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Your last name </label>
+                <span asp-validation-for="clname" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="cphone number" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input asp-for=cphone type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
+                <span asp-validation-for="cphone" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="cemail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=cemail name="cemail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4"> Your Email</label>
+                <span asp-validation-for="cemail" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
                 <input name="croomno" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
@@ -68,20 +71,24 @@
                 Concierge Location
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating  mb-3 text-muted">
-                <input name="cstreet" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=cstreet name="cstreet" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Street</label>
+                <span asp-validation-for="cstreet" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                <input name="ccity" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=ccity name="ccity" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label  for="exampleFormControlInput1" class="form-label ps-4">City</label>
+                <span asp-validation-for="ccity" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                <input name="cstate" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=cstate name="cstate" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label  for="exampleFormControlInput1" class="form-label ps-4">State</label>
+                <span asp-validation-for="cstate" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                <input name="czip" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=czip name="czip" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label  for="exampleFormControlInput1" class="form-label ps-4">Zip Code</label>
+                <span asp-validation-for="czip" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
@@ -96,17 +103,20 @@
                     Enter Brief Details Of
                     Symptoms
                 </label>
+
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=first_name name="first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">First name</label>
+                <span asp-validation-for="first_name" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input asp-for=last_name name="last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">last name </label>
+                <span asp-validation-for="last_name" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="dob" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
+                <input  name="dob" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Date Of Birth</label>
             </div>
         </div>
@@ -115,24 +125,14 @@
                 Patient Contact Information
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="pemail" type="email" class="form-control" onchange="emailExists()" id="exampleFormControlInput1" placeholder="Firstname">
+                <input asp-for=pemail name="pemail" type="email" class="form-control" onchange="emailExists()" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Email</label>
+                <span asp-validation-for="pemail" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input name="pphonenumber" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                <input asp-for=Phonenumber type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" style="display:none;" id="pwd_div">
-                <input asp-for=password name="password" type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
-                <label for="exampleFormControlInput1" class="form-label ps-4">Password</label>
-                <span asp-validation-for="password" class="text-danger"></span>
-            </div>
-            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" style="display:none;" id="con_pwd_div">
-                <input asp-for=cpassword name="confirmpassword" type="password" class="form-control" id="exampleFormControlInput1" placeholder="confirm password">
-                <label for="exampleFormControlInput1" class="form-label ps-4">confirm password</label>
-                <span asp-validation-for="cpassword" class="text-danger"></span>
+                <span asp-validation-for="Phonenumber" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
@@ -146,31 +146,10 @@
         </div>
         <div class="text-end d-md-flex justify-content-md-end pb-3">
             <button class="btn btn-info me-2 text-white" type="submit">Submit</button>
-            <button class="btn btn-white text-info border-info" type="button">cancel</button>
+            <button class="btn btn-white text-info border-info" type="reset">cancel</button>
         </div>
     </div>
 </form>
 <footer class="text-center justify-content-center bg-black mt-2 ">
     <div class="text-white">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
 </footer>
-<script>
-    function emailExists() {
-        var email = document.getElementById("email").value;
-        fetch('/Home/patient/' + email)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-
-                if (!data.exists) {
-                    document.getElementById('pwd_div').style.display = 'block';
-                    document.getElementById('con_pwd_div').style.display = 'block';
-                }
-                else {
-                    document.getElementById('pwd_div').style.display = 'none';
-                    document.getElementById('con_pwd_div').style.display = 'none';
-                }
-
-            })
-            .catch(error => console.error('Error:', error));
-    }
-</script>

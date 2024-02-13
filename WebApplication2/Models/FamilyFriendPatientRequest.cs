@@ -1,21 +1,33 @@
-﻿namespace WebApplication2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication2.Models
 {
     public class FamilyFriendPatientRequest
     {
-        public string? f_first_name { get; set; }
-        public string? f_last_name { get; set; }
-        public string? f_phone_number { get; set; }
-        public string? f_email { get; set; }
+        [Required(ErrorMessage = "Family / Friend  First Name is required.")]
+        public string f_first_name { get; set; } = null!;
+        [Required(ErrorMessage = "Family / Friend Last Name is required.")]
+        public string f_last_name { get; set; } = null!;
+        [Required(ErrorMessage = "Phone Number is required.")]
+        public string f_phone_number { get; set; } = null!;
+        [Required(ErrorMessage = "Email is required.")]
+        public string f_email { get; set; } = null!;
         public DateTime Createddate { get; set; }= DateTime.Now;
+        [Required(ErrorMessage = "patient First Name is required.")]
         public string p_first_name { get; set; } = null!;
-        public string? p_last_name { get; set; }
+        [Required(ErrorMessage = "patient Last Name is required.")]
+        public string p_last_name { get; set; } = null!;
+        [Required(ErrorMessage = "Email is required.")]
         public string p_email { get; set; } = null!;
-        public string? p_phonenumber { get; set; }
-        public string? p_street { get; set; }
-        public string? p_city { get; set; }
-        public string? p_state { get; set; }
-        public string? p_zip { get; set; }
-        public string password { get; set; } = null!;
-        public string cpassword { get; set; } = null!;
+        [Required(ErrorMessage = "Phone Number is required.")]
+        public string p_phonenumber { get; set; } = null!;
+        [Required(ErrorMessage = "street name is required.")]
+        public string p_street { get; set; } = null!;
+        [Required(ErrorMessage = "city name is required.")]
+        public string p_city { get; set; } = null!;
+        [Required(ErrorMessage = "state name is required.")]
+        public string p_state { get; set; } = null!;
+        [Required(ErrorMessage = "zip code is required.")]
+        public string p_zip { get; set; } = null!;
     }
 }

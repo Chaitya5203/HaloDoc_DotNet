@@ -1,26 +1,40 @@
-﻿namespace WebApplication2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication2.Models
 {
     public class ConciergePatientRequest
     {
+        [Required(ErrorMessage = "First Name is required.")]
         public string cname { get; set; } = null!;
-        public string? clname { get; set; }
-        public string? cemail { get; set; }
-        public string? cphone { get; set; }
+        [Required(ErrorMessage = "Last Name is required.")]
+        public string clname { get; set; } = null!;
+        [Required(ErrorMessage = "Email is required.")]
+        public string cemail { get; set; } = null!;
+        [Required(ErrorMessage = "Phone Number is required.")]
+        public string cphone { get; set; } = null!;
+        [Required(ErrorMessage = "Street is required.")]
         public string cstreet { get; set; } = null!;
+        [Required(ErrorMessage = "city is required.")]
         public string ccity { get; set; } = null!;
+        [Required(ErrorMessage = "state name is required.")]
         public string cstate { get; set; } = null!;
+        [Required(ErrorMessage = "zip code is required.")]
         public string czip { get; set; } = null!;
+        [Required(ErrorMessage = "Zip Code is required.")]
         public int Regionid { get; set; } = 1;
         public DateTime Createddate { get; set; } = DateTime.Now;
+        [Required(ErrorMessage = "Patient First name is required.")]
         public string first_name { get; set; } = null!;
-        public string? last_name { get; set; }
+        [Required(ErrorMessage = "patient last name is required.")]
+        public string last_name { get; set; } = null!;
+        [Required(ErrorMessage = "patient email name is required.")]
         public string pemail { get; set; } = null!;
-        public string? Phonenumber { get; set; }
+        [Required(ErrorMessage = "patient phone number name is required.")]
+        public string Phonenumber { get; set; } = null!;
         public string? Street { get; set; }
-        public string? City { get; set; }
-        public string? State { get; set; }
+        public string? City { get; set; } 
+        public string? State { get; set; } 
+        
         public string? p_zip_code { get; set; }
-        public string password { get; set; } = null!;
-        public string cpassword { get; set; } = null!;
     }
 }

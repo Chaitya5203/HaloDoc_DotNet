@@ -45,6 +45,48 @@ namespace WebApplication2.Controllers
 
             return View(aspnetuser);
         }
+        // Request on me 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SubmitRequestOnMe(Userdata info)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("../Home/SubmitRequestOnMe", info);
+            }
+            Request request = new Request
+            {
+                Requesttypeid = 1,
+                Isurgentemailsent = new BitArray(1, false),
+                Status = 1,
+                Firstname = info.first_name,
+                Lastname = info.last_name,
+                Email = info.email,
+                Phonenumber = info.phonenumber,
+                Createddate = info.Createddate,
+            };
+            _context.Requests.Add(request);
+            await _context.SaveChangesAsync();
+
+            Requestclient requestclient = new Requestclient
+            {
+                Requestid = request.Requestid,
+                Firstname = info.first_name,
+                Lastname = info.last_name,
+                Email = info.email,
+                Phonenumber = info.phonenumber,
+                Regionid = 1,
+                Street = info.street,
+                City = info.city,
+                Zipcode = info.zipcode
+            };
+            _context.Requestclients.Add(requestclient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(patientdashboard), "Home");
+        }
+
+
+        //Create Patient
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatient(Userdata info)
@@ -104,8 +146,26 @@ namespace WebApplication2.Controllers
                 Zipcode = info.zipcode
             };
             _context.Requestclients.Add(requestclient);
-            await _context.SaveChangesAsync();  
+            await _context.SaveChangesAsync();
+
+            var file = info.File;
+            var uniqueFileName = Path.GetFileName(file.FileName);
+            var uploads = Path.Combine("wwwroot", "uploads");
+            var filePath = Path.Combine(uploads, uniqueFileName);
+            file.CopyTo(new FileStream(filePath, FileMode.Create));
+
+            var addrequestfile = new Requestwisefile
+            {
+                Createddate = DateTime.Now,
+                Filename = uniqueFileName,
+                Requestid = request.Requestid
+            };
+            _context.Requestwisefiles.Add(addrequestfile);
+            _context.SaveChanges();
+
             return RedirectToAction(nameof(patientlogin), "Home");
+
+          
         }
         //Businesss Data Store 
 
@@ -114,6 +174,10 @@ namespace WebApplication2.Controllers
 
         public async Task<IActionResult> CreatePatientByBusiness(BusinessPatientRequest info)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("../Home/business",info);
+            }
             Aspnetuser aspuser = new Aspnetuser
             {
                 Usarname = info.first_name,
@@ -172,6 +236,10 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatientByFamilyFriend(FamilyFriendPatientRequest info)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("../Home/familyfriend", info);
+            }
             Aspnetuser aspuser = new Aspnetuser
             {
                 Usarname = info.p_first_name,
@@ -230,6 +298,10 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatientByConcierge(ConciergePatientRequest info)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("../Home/concierge", info);
+            }
             Concierge c = new Concierge
             {
                 Conciergename = info.cname,

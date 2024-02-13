@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Extensions.FileProviders;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication2.Models
 {
@@ -15,7 +16,7 @@ namespace WebApplication2.Models
         public string email { get; set; } = null!;
         [Required(ErrorMessage = "Phone Number is required.")]
         public string? phonenumber { get; set; }
-        [Required(ErrorMessage = "Phone Number is required.")]
+        [Required(ErrorMessage = "Street is required.")]
         public string? street { get; set; }
         [Required(ErrorMessage = "dob is required.")]
         public string? dob { get; set; }
@@ -29,9 +30,10 @@ namespace WebApplication2.Models
         public string? zipcode { get; set; }
         [Required(ErrorMessage = "create date is required.")]
         public DateTime Createddate { get; set; } = DateTime.Now;
-        [Required(ErrorMessage = "password is required.")]
-        public string password { get; set; } = null!;
-        [Required(ErrorMessage = "Confirm Password is required.")]
-        public string cpassword { get; set; } = null!;
+        public string? password { get; set; }
+        public string? cpassword { get; set; }
+
+        public IFormFile File { get; set; } 
+
     }
 }

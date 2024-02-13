@@ -21,6 +21,14 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+        public IActionResult SubmitRequestOnMe()
+        {
+            return View();
+        }
+        public IActionResult SubmitRequestSomeone()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
