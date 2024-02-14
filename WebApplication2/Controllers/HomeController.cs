@@ -16,7 +16,12 @@ namespace WebApplication2.Controllers
             _logger = logger;
             _context = context;
         }
-
+        public async Task<IActionResult> document( int id)
+        {
+            HttpContext.Session.SetString("req_id", id.ToString());
+            return _context.Requestwisefiles != null ?
+                          View(_context.Requestwisefiles.Where(m => m.Requestid == id).ToList()) : Problem("vchgvytfvtv");
+        }
         public IActionResult Index()
         {
             return View();
@@ -97,7 +102,9 @@ namespace WebApplication2.Controllers
         }
         public async Task<IActionResult> patientdashboard()
         {
-            return _context.Requests != null ? View(await _context.Requests.ToListAsync()) : Problem("No data");
+            //var aspnetuser = await _context.Aspnetusers.FirstOrDefaultAsync(m => m.Usarname == TempData["Usarname"]);
+            //var user = await _context.Users.FirstOrDefaultAsync(m => m.Aspnetuserid == aspnetuser.Id );
+            return _context.Requests != null ? View(await _context.Requests/*.Where(m => m.Userid == user.Userid)*/.ToListAsync()) : Problem("No data");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

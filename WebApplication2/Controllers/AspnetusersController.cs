@@ -15,7 +15,9 @@ namespace WebApplication2.Controllers
     public class AspnetusersController : Controller
     {
         private readonly ApplicationContext _context;
-
+        public string FileNameOnServer { get; set; }    
+        public string FileContentType { get; set; }    
+        public long FileContentLength { get; set; } 
         public AspnetusersController(ApplicationContext context)
         {
             _context = context;
@@ -45,7 +47,9 @@ namespace WebApplication2.Controllers
 
             return View(aspnetuser);
         }
-        // Request on me 
+
+        // Request on me page When Dashboard Is Open and request is Created 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitRequestOnMe(Userdata info)
@@ -85,25 +89,118 @@ namespace WebApplication2.Controllers
             return RedirectToAction(nameof(patientdashboard), "Home");
         }
 
+        // Request on me page When Dashboard Is Open and request is Created 
+        public async Task<IActionResult> SubmitRequestSomeone(FamilyFriendPatientRequest info)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("../Home/SubmitRequestSomeone", info);
+            }
+            Request request = new Request
+            {
+                Requesttypeid = 1,
+                Isurgentemailsent = new BitArray(1, false),
+                Status = 1,
+                Firstname = info.f_first_name,
+                Lastname = info.f_last_name,
+                Email = info.f_email,
+                Phonenumber = info.f_phone_number,
+                Createddate = info.Createddate,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
 
-        //Create Patient
+            Requestclient requestclient = new Requestclient
+            {
+                Requestid = request.Requestid,
+                Firstname = info.p_first_name,
+                Lastname = info.p_last_name,
+                Email = info.f_email,
+                Phonenumber = info.p_phonenumber,
+                Regionid = 1,
+                Street = info.p_street,
+                City = info.p_city,
+                Zipcode = info.p_zip
+            };
+            _context.Requestclients.Add(requestclient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(patientdashboard), "Home");
+        }
+
+        [HttpPost]
+        public IActionResult UploadFile(IFormFile fileToUpload)
+        {
+
+
+            if (fileToUpload != null && fileToUpload.Length > 0)
+            {
+                // User selected a file
+                // Get a temporary path
+                //FileNameOnServer = Path.GetTempPath() + "~/wwwroot/UploadedFiles/";
+                //FileNameOnServer = "D:\\Projects\\HelloDOC\\MVC\\Hallodoc - Copy\\wwwroot\\UploadedF\\";
+                var uploads = Path.Combine("wwwroot", "uploads");
+                var FileNameOnServer = Path.Combine(uploads, fileToUpload.FileName);
+                // Add the file name to the path
+                FileNameOnServer += fileToUpload.FileName;
+                // Get the file's length
+                FileContentLength = fileToUpload.Length;
+                // Get the file's type
+                FileContentType = fileToUpload.ContentType;
+
+                // Create a stream to write the file to
+                using var stream = System.IO.File.Create(FileNameOnServer);
+                // Upload file and copy to the stream
+                 
+           
+                fileToUpload.CopyTo(stream);
+
+                //var userobj = _context.Requests.FirstOrDefaultAsync(m => m.Requestid == (int)TempData["req_id"]);
+
+                Requestwisefile reqclient = new Requestwisefile
+                {
+                    Requestid = 3,
+                    Filename = fileToUpload.FileName,
+                    Createddate = DateTime.Now,
+                };
+                _context.Requestwisefiles.Add(reqclient);
+                _context.SaveChanges();
+
+                // Return a success page
+                return RedirectToAction(nameof(patientdashboard), "Home");
+            }
+            else
+            {
+                // User did not select a file
+                return RedirectToAction(nameof(patientdashboard), "Home");
+            }
+
+        }
+
+        //Create Patient By It Self 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatient(Userdata info)
         {
+            var userobj = await _context.Aspnetusers
+           .FirstOrDefaultAsync(m => m.Usarname == info.first_name);
             if (!ModelState.IsValid)
             {
                 return View("../Home/patient",info);
             }
-            Aspnetuser aspuser = new Aspnetuser
+            if(userobj == null)                 
             {
-                Usarname = info.first_name,
-                Passwordhash = info.last_name,
-                Email = info.email,
-                Createddate = info.Createddate
-            };
-            _context.Aspnetusers.Add(aspuser);
-            await _context.SaveChangesAsync();
+                Aspnetuser aspuser = new Aspnetuser
+                {
+                    Usarname = info.first_name,
+                    Passwordhash = info.last_name,
+                    Email = info.email,
+                    Createddate = info.Createddate
+                };
+                _context.Aspnetusers.Add(aspuser);
+                await _context.SaveChangesAsync();
+                userobj.Id = aspuser.Id;
+            }
             User user = new User
             {
                 Firstname = info.first_name,
@@ -113,7 +210,7 @@ namespace WebApplication2.Controllers
                 Street = info.street,
                 City = info.city,
                 State = info.state,
-                Aspnetuserid =aspuser.Id,
+                Aspnetuserid =userobj.Id,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
@@ -152,8 +249,7 @@ namespace WebApplication2.Controllers
             var uniqueFileName = Path.GetFileName(file.FileName);
             var uploads = Path.Combine("wwwroot", "uploads");
             var filePath = Path.Combine(uploads, uniqueFileName);
-            file.CopyTo(new FileStream(filePath, FileMode.Create));
-
+            file.CopyTo(new FileStream(filePath, FileMode.Create));           
             var addrequestfile = new Requestwisefile
             {
                 Createddate = DateTime.Now,
@@ -162,12 +258,9 @@ namespace WebApplication2.Controllers
             };
             _context.Requestwisefiles.Add(addrequestfile);
             _context.SaveChanges();
-
-            return RedirectToAction(nameof(patientlogin), "Home");
-
-          
+            return RedirectToAction(nameof(patientlogin), "Home");        
         }
-        //Businesss Data Store 
+        //Businesss Data Store On Business Page 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -231,7 +324,9 @@ namespace WebApplication2.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(patientlogin), "Home");
         }
-        /// Family Friend
+
+        /// Family Friend Data store on Family Friend Page    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatientByFamilyFriend(FamilyFriendPatientRequest info)
@@ -293,7 +388,9 @@ namespace WebApplication2.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(patientlogin), "Home");
         }
-        // Concierge Data Store 
+
+        // Concierge Data Store On Concierge Page 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatientByConcierge(ConciergePatientRequest info)
@@ -369,6 +466,7 @@ namespace WebApplication2.Controllers
             return RedirectToAction(nameof(patientlogin), "Home");
         }
 
+        //Routing Of The Data and Check if email exist if not then add column password and confirm password 
 
         [Route("/Home/patient/{email}")]
         [Route("/Home/business/{email}")]
@@ -381,6 +479,7 @@ namespace WebApplication2.Controllers
             var emailExists = _context.Aspnetusers.Any(u => u.Email == email);
             return Json(new { exists = emailExists });
         }
+
         // GET: Aspnetusers/Create
         public IActionResult Create()
         {
@@ -395,7 +494,9 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        // GET: Aspnetusers/Create
+
+        // GET: Aspnetusers/Create where the data is check and user can login on it and added session on that page 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Usarname,Passwordhash")] Aspnetuser aspnetuser)
@@ -404,9 +505,15 @@ namespace WebApplication2.Controllers
             .FirstOrDefaultAsync(m => m.Usarname == aspnetuser.Usarname && m.Passwordhash == aspnetuser.Passwordhash);
             if (userobj == null)
             {
+               
                 return RedirectToAction(nameof(patientlogin), "Home");
             }
-            return RedirectToAction(nameof(patientdashboard), "Home");
+            else
+            {
+                HttpContext.Session.SetString("Usarname", userobj.Usarname);
+                HttpContext.Session.SetString("Usarname", userobj.Usarname);
+                return RedirectToAction(nameof(patientdashboard), "Home");
+            }  
         }
         // POST: Aspnetusers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

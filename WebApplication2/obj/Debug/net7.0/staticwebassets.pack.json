@@ -849,12 +849,60 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\20170109104608_Visual Studio Overview.pptx20170109104608_Visual Studio Overview.pptx",
+      "PackagePath": "staticwebassets\\uploads\\20170109104608_Visual Studio Overview.pptx20170109104608_Visual Studio Overview.pptx"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\HalloDoc - DB.xlsxHalloDoc - DB.xlsx",
+      "PackagePath": "staticwebassets\\uploads\\HalloDoc - DB.xlsxHalloDoc - DB.xlsx"
+    },
+    {
       "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\MVC.pdf",
       "PackagePath": "staticwebassets\\uploads\\MVC.pdf"
     },
     {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\MVC.pdfMVC.pdf",
+      "PackagePath": "staticwebassets\\uploads\\MVC.pdfMVC.pdf"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Phase 1 - Training Plan .net.pdfPhase 1 - Training Plan .net.pdf",
+      "PackagePath": "staticwebassets\\uploads\\Phase 1 - Training Plan .net.pdfPhase 1 - Training Plan .net.pdf"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\SQL Assignments-24.pdfSQL Assignments-24.pdf",
+      "PackagePath": "staticwebassets\\uploads\\SQL Assignments-24.pdfSQL Assignments-24.pdf"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\SRS-23-24-Trainees-2Feb24.pdf",
+      "PackagePath": "staticwebassets\\uploads\\SRS-23-24-Trainees-2Feb24.pdf"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\SRS-23-24-Trainees.pdfSRS-23-24-Trainees.pdf",
+      "PackagePath": "staticwebassets\\uploads\\SRS-23-24-Trainees.pdfSRS-23-24-Trainees.pdf"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Screenshot (1).pngScreenshot (1).png",
+      "PackagePath": "staticwebassets\\uploads\\Screenshot (1).pngScreenshot (1).png"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Session - ASP .net core- Entity Framework with  + PostgreSQL integration .pptxSession - ASP .net core- Entity Framework with  + PostgreSQL integration .pptx",
+      "PackagePath": "staticwebassets\\uploads\\Session - ASP .net core- Entity Framework with  + PostgreSQL integration .pptxSession - ASP .net core- Entity Framework with  + PostgreSQL integration .pptx"
+    },
+    {
       "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Session 2 (1).txt",
       "PackagePath": "staticwebassets\\uploads\\Session 2 (1).txt"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Session 2 (1).txtSession 2 (1).txt",
+      "PackagePath": "staticwebassets\\uploads\\Session 2 (1).txtSession 2 (1).txt"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\net-Whole-Plane-2024.pdfnet-Whole-Plane-2024.pdf",
+      "PackagePath": "staticwebassets\\uploads\\net-Whole-Plane-2024.pdfnet-Whole-Plane-2024.pdf"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\sample.odssample.ods",
+      "PackagePath": "staticwebassets\\uploads\\sample.odssample.ods"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.WebApplication2.Microsoft.AspNetCore.StaticWebAssets.props",

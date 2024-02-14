@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.FileProviders;
 using System.ComponentModel.DataAnnotations;
-
 namespace WebApplication2.Models
 {
     public class Userdata
@@ -32,8 +31,6 @@ namespace WebApplication2.Models
         public DateTime Createddate { get; set; } = DateTime.Now;
         public string? password { get; set; }
         public string? cpassword { get; set; }
-
-        public IFormFile File { get; set; } 
-
+        public IFormFile File { get; set; }
     }
 }
