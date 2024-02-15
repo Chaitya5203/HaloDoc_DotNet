@@ -5,13 +5,10 @@ namespace WebApplication2.Models
     public class Userdata
     {
         [Required(ErrorMessage = "First Name is required.")]
-        [MinLength(5, ErrorMessage = "The First Name must be atleast 5 characters")]
-        [MaxLength(15, ErrorMessage = "The First Name cannot be more than 15 characters")]
         public string first_name { get; set; } = null!;
         [Required(ErrorMessage = "Last Name is required.")]
         public string? last_name { get; set; }
         [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress(ErrorMessage = "Email is incorrect")]
         public string email { get; set; } = null!;
         [Required(ErrorMessage = "Phone Number is required.")]
         public string? phonenumber { get; set; }
@@ -31,6 +28,6 @@ namespace WebApplication2.Models
         public DateTime Createddate { get; set; } = DateTime.Now;
         public string? password { get; set; }
         public string? cpassword { get; set; }
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
     }
 }

@@ -27,7 +27,7 @@
         </button>
     </a>
 </div>
-<form asp-action="CreatePatientByFamilyFriend" asp-controller="Aspnetusers">
+<form asp-action="CreatePatientByFamilyFriend" asp-controller="Aspnetusers" method="post" enctype="multipart/form-data">
     <div class="container bg-white rounded shadow mt-3">
         <!-- <div class="row text-end position-relative ">
             <div class="col d-md-flex justify-content-md-end">
@@ -144,7 +144,7 @@
         </div>
         <fieldset id="upload">
             <div class="input-group mb-3">
-                <input type="file" class="form-control" id="inputGroupFile02">
+                <input type="file" class="form-control" id="inputGroupFile02" asp-for="File">
                 <label class="input-group-text text-muted p-0" for="inputGroupFile02">
                     <label class="btn btn-info mx-0">
                         <i class="fa-solid fa-cloud-arrow-up" style="color: #ffffff;"></i>

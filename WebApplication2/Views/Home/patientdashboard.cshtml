@@ -1,4 +1,4 @@
-@model IEnumerable<WebApplication2.Data.Request>
+@model WebApplication2.Models.profile
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor Accessor
 @{
@@ -76,20 +76,22 @@
                 <table class="table">
                     <thead>
                         <tr class="bg-light h-100">
-                            <th scope="col">@Html.DisplayNameFor(model => model.Createddate) <i class="fa fa-arrow-down" aria-hidden="true"></i></th>
-                            <th scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+                            <th scope="col">Create Date<i class="fa fa-arrow-down" aria-hidden="true"></i></th>
+                            <th scope="col">Status</th>
                             <th scope="col">Document</th>
                         </tr>
                     </thead>
                     <tbody class="text-muted">
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Request.ToList())
                         {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Createddate)</td>
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Createddate)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                <td><a asp-action="document" asp-controller="Home" asp-route-id="@item.Requestid"><button class="btn btn-white" style="border-color: #54d4d3; color: #54d4d3;">Document </button></a></td>
-                        </tr>
+                                <td><a asp-action="document" asp-controller="Home" asp-route-id="@item.Requestid"><button class="btn btn-white" style="border-color: #54d4d3; color: #54d4d3;">(@ViewBag.RequestIdCounts[item.Requestid])Document</button></a></td>
+                             </tr>
+                            
                         }
+                      
                         @* <tr>
                             <td>Feb 05,2023</td>
                             <td>Processing</td>
@@ -148,7 +150,7 @@
                     </div>
                 </div>
                 <div class="accordion" style="background-color: #54d4d3;" id="accordionExample">
-                    @foreach (var item in Model)
+                @foreach (var item in Model.Request.ToList())
                         {
                         string id = 'a' + item.Requestid.ToString();
                         <div class="accordion-item">
@@ -194,11 +196,11 @@
                             <h4 class="mb-3">General Information</h4>
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                                    <input  name="first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                                    <input value="@Model.User.Firstname" name="first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname" disabled>
                                     <label for="exampleFormControlInput1" class="form-label ps-4">First name</label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                                    <input name="last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                                    <input value="@Model.User.Lastname" name="last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname" disabled>
                                     <label for="exampleFormControlInput1" class="form-label ps-4">last name </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
@@ -231,11 +233,11 @@
                                   </ul>
                                 </div> *@
                                 <div class="col-sm-12 col-md-4 col-xl-4 form-floating mb-3 text-muted">
-                                    <input name="phonenumber" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                                    <input value="@Model.User.Mobile" name="phonenumber" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname" disabled>
                                     <label  for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" >
-                                    <input name="email" type="email" class="form-control" id="email" placeholder="Firstname">
+                                    <input value="@Model.User.Email" name="email" type="email" class="form-control" id="email" placeholder="Firstname" disabled>
                                     <label for="email" class="form-label ps-4">Email</label>
                                 </div>
                              </div>
@@ -244,19 +246,19 @@
                                     Location Information
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6 form-floating  mb-3 text-muted">
-                                    <input type="text" name="street" class="form-control" id="exampleFormControlInput1"placeholder="Street">
+                                    <input value="@Model.User.Street" type="text" name="street" class="form-control" id="exampleFormControlInput1" placeholder="Street" disabled>
                                     <label for="exampleFormControlInput1" class="form-label ps-4">Street</label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                                    <input type="text" name="city" class="form-control" id="exampleFormControlInput1" placeholder="City">
+                                    <input value="@Model.User.City" type="text" name="city" class="form-control" id="exampleFormControlInput1" disabled placeholder="City">
                                     <label for="exampleFormControlInput1" class="form-label ps-4">City</label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                                    <input  type="text" name="state" class="form-control" id="exampleFormControlInput1" placeholder="State">
+                                    <input value="@Model.User.State" type="text" name="state" class="form-control" disabled id="exampleFormControlInput1" placeholder="State">
                                     <label for="exampleFormControlInput1" class="form-label ps-4">State</label>
                                 </div>
                                 <div class="col-sm-12 col-md-4 col-xl-4  form-floating mb-3 text-muted">
-                                    <input type="text" name="zipcode" class="form-control" id="exampleFormControlInput1" placeholder="Zip Code">
+                                    <input value="@Model.User.Zip" type="text" name="zipcode" class="form-control" disabled id="exampleFormControlInput1" placeholder="Zip Code">
                                     <label for="exampleFormControlInput1" class="form-label ps-4">Zip Code</label>
                                 </div>
                                 <div class="col-2 mb-3">

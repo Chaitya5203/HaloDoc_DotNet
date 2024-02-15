@@ -140,4 +140,5 @@ public partial class Request
 
     [InverseProperty("Request")]
     public virtual ICollection<Smslog> Smslogs { get; set; } = new List<Smslog>();
+   
 }

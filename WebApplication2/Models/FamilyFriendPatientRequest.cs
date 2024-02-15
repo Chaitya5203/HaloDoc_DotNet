@@ -29,5 +29,6 @@ namespace WebApplication2.Models
         public string p_state { get; set; } = null!;
         [Required(ErrorMessage = "zip code is required.")]
         public string p_zip { get; set; } = null!;
+        public IFormFile? File { get; set; }
     }
 }

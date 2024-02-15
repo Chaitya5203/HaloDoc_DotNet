@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.DependencyResolver;
+using System;
 using System.Diagnostics;
 using WebApplication2.Data;
 using WebApplication2.Models;
@@ -18,8 +20,11 @@ namespace WebApplication2.Controllers
         }
         public async Task<IActionResult> document( int id)
         {
-            HttpContext.Session.SetString("req_id", id.ToString());
-            return _context.Requestwisefiles != null ?
+
+
+            TempData["req_id"] = id;
+                //HttpContext.Session.SetString("req_id", id.ToString());
+                return _context.Requestwisefiles != null ?
                           View(_context.Requestwisefiles.Where(m => m.Requestid == id).ToList()) : Problem("vchgvytfvtv");
         }
         public IActionResult Index()
@@ -104,7 +109,25 @@ namespace WebApplication2.Controllers
         {
             //var aspnetuser = await _context.Aspnetusers.FirstOrDefaultAsync(m => m.Usarname == TempData["Usarname"]);
             //var user = await _context.Users.FirstOrDefaultAsync(m => m.Aspnetuserid == aspnetuser.Id );
-            return _context.Requests != null ? View(await _context.Requests/*.Where(m => m.Userid == user.Userid)*/.ToListAsync()) : Problem("No data");
+            //return _context.Requests != null ? View(await _context.Requests/*.Where(m => m.Userid == user.Userid)*/.ToListAsync()) : Problem("No data");
+            var userData = _context.Users.FirstOrDefault(m => m.Firstname == HttpContext.Session.GetString("Usarname"));
+            var requestData = _context.Requests.Where(m => m.Userid == userData.Userid).ToList();
+
+            Dictionary<int, int> requestIdCounts = new Dictionary<int, int>();
+            foreach (var request in requestData)
+            {
+                int count = _context.Requestwisefiles.Count(r => r.Requestid == request.Requestid);
+                requestIdCounts.Add(request.Requestid, count);
+            }
+            ViewBag.RequestIdCounts = requestIdCounts;
+
+            profile profile = new();
+
+                
+            profile.Request = requestData;
+            profile.User = userData;
+
+            return View(profile);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

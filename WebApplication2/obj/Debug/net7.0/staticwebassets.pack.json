@@ -853,8 +853,40 @@
       "PackagePath": "staticwebassets\\uploads\\20170109104608_Visual Studio Overview.pptx20170109104608_Visual Studio Overview.pptx"
     },
     {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\7768657_3763028.jpg",
+      "PackagePath": "staticwebassets\\uploads\\7768657_3763028.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\7768657_3763028.jpg7768657_3763028.jpg",
+      "PackagePath": "staticwebassets\\uploads\\7768657_3763028.jpg7768657_3763028.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\7774236_3736765.jpg7774236_3736765.jpg",
+      "PackagePath": "staticwebassets\\uploads\\7774236_3736765.jpg7774236_3736765.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Fig14. Block case.jpg",
+      "PackagePath": "staticwebassets\\uploads\\Fig14. Block case.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Fig2. Forgot Password.jpgFig2. Forgot Password.jpg",
+      "PackagePath": "staticwebassets\\uploads\\Fig2. Forgot Password.jpgFig2. Forgot Password.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Fig4. Admin dashboard in New state.jpgFig4. Admin dashboard in New state.jpg",
+      "PackagePath": "staticwebassets\\uploads\\Fig4. Admin dashboard in New state.jpgFig4. Admin dashboard in New state.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Fig5. Admin dashboard in pending state.jpg",
+      "PackagePath": "staticwebassets\\uploads\\Fig5. Admin dashboard in pending state.jpg"
+    },
+    {
       "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\HalloDoc - DB.xlsxHalloDoc - DB.xlsx",
       "PackagePath": "staticwebassets\\uploads\\HalloDoc - DB.xlsxHalloDoc - DB.xlsx"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\MOCK_DATA.csv",
+      "PackagePath": "staticwebassets\\uploads\\MOCK_DATA.csv"
     },
     {
       "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\MVC.pdf",
@@ -885,6 +917,10 @@
       "PackagePath": "staticwebassets\\uploads\\Screenshot (1).pngScreenshot (1).png"
     },
     {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Session - ASP .net core- Entity Framework with  + PostgreSQL integration .pptx",
+      "PackagePath": "staticwebassets\\uploads\\Session - ASP .net core- Entity Framework with  + PostgreSQL integration .pptx"
+    },
+    {
       "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Session - ASP .net core- Entity Framework with  + PostgreSQL integration .pptxSession - ASP .net core- Entity Framework with  + PostgreSQL integration .pptx",
       "PackagePath": "staticwebassets\\uploads\\Session - ASP .net core- Entity Framework with  + PostgreSQL integration .pptxSession - ASP .net core- Entity Framework with  + PostgreSQL integration .pptx"
     },
@@ -895,6 +931,10 @@
     {
       "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Session 2 (1).txtSession 2 (1).txt",
       "PackagePath": "staticwebassets\\uploads\\Session 2 (1).txtSession 2 (1).txt"
+    },
+    {
+      "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\bg.jpgbg.jpg",
+      "PackagePath": "staticwebassets\\uploads\\bg.jpgbg.jpg"
     },
     {
       "Id": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\net-Whole-Plane-2024.pdfnet-Whole-Plane-2024.pdf",

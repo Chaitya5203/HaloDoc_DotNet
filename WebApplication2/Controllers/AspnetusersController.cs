@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -130,18 +131,16 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult UploadFile(IFormFile fileToUpload)
         {
-
-
             if (fileToUpload != null && fileToUpload.Length > 0)
             {
                 // User selected a file
                 // Get a temporary path
                 //FileNameOnServer = Path.GetTempPath() + "~/wwwroot/UploadedFiles/";
-                //FileNameOnServer = "D:\\Projects\\HelloDOC\\MVC\\Hallodoc - Copy\\wwwroot\\UploadedF\\";
+                //FileNameOnServer = "D:/Projects/HelloDOC/MVC/Hallodoc - Copy/wwwroot/UploadedF/";
                 var uploads = Path.Combine("wwwroot", "uploads");
                 var FileNameOnServer = Path.Combine(uploads, fileToUpload.FileName);
                 // Add the file name to the path
-                FileNameOnServer += fileToUpload.FileName;
+                //FileNameOnServer += fileToUpload.FileName;
                 // Get the file's length
                 FileContentLength = fileToUpload.Length;
                 // Get the file's type
@@ -158,7 +157,7 @@ namespace WebApplication2.Controllers
 
                 Requestwisefile reqclient = new Requestwisefile
                 {
-                    Requestid = 3,
+                    Requestid = (int)TempData["req_id"],
                     Filename = fileToUpload.FileName,
                     Createddate = DateTime.Now,
                 };
@@ -176,19 +175,49 @@ namespace WebApplication2.Controllers
 
         }
 
+        //download File 
+        public async Task<IActionResult> DownloadFile(int id)
+        {
+            var file = _context.Requestwisefiles.Find(id);
+            var filepath = "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\" + Path.GetFileName(file.Filename);
+            var bytes = System.IO.File.ReadAllBytes(filepath);
+            return File(bytes, "application/octet-stream", file.Filename);
+        }
+        public IActionResult DownloadAll()
+        {
+
+
+            var filesRow = _context.Requestwisefiles.Where(u => u.Requestid == (int)TempData["req_id"]).ToList();
+            MemoryStream ms = new MemoryStream();
+            using (ZipArchive zip = new ZipArchive(ms, ZipArchiveMode.Create, true))
+                filesRow.ForEach(file =>
+                {
+
+                    var path = "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\"+ Path.GetFileName(file.Filename); 
+                    ZipArchiveEntry zipEntry = zip.CreateEntry(file.Filename);
+                    using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    using (Stream zipEntryStream = zipEntry.Open())
+                    {
+                        fs.CopyTo(zipEntryStream);
+                    }
+                });
+            return File(ms.ToArray(), "application/zip", "download.zip");
+        }
+
         //Create Patient By It Self 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatient(Userdata info)
         {
+            var temp = 0;
             var userobj = await _context.Aspnetusers
            .FirstOrDefaultAsync(m => m.Usarname == info.first_name);
             if (!ModelState.IsValid)
             {
-                return View("../Home/patient",info);
+                return View("../Home/patient", info);
             }
-            if(userobj == null)                 
+            if (userobj == null)                 
             {
                 Aspnetuser aspuser = new Aspnetuser
                 {
@@ -199,7 +228,7 @@ namespace WebApplication2.Controllers
                 };
                 _context.Aspnetusers.Add(aspuser);
                 await _context.SaveChangesAsync();
-                userobj.Id = aspuser.Id;
+                temp = aspuser.Id;
             }
             User user = new User
             {
@@ -210,7 +239,7 @@ namespace WebApplication2.Controllers
                 Street = info.street,
                 City = info.city,
                 State = info.state,
-                Aspnetuserid =userobj.Id,
+                Aspnetuserid = temp,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
@@ -219,6 +248,7 @@ namespace WebApplication2.Controllers
             Request request = new Request
             {
                 Requesttypeid = 1,
+                Userid = user.Userid,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
                 Firstname = info.first_name,
@@ -298,6 +328,7 @@ namespace WebApplication2.Controllers
             Request request = new Request
             {
                 Requesttypeid = 1,
+                Userid = user.Userid,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
                 Firstname = info.first_name,
@@ -344,19 +375,7 @@ namespace WebApplication2.Controllers
             };
             _context.Aspnetusers.Add(aspuser);
             _context.SaveChanges();
-            Request request = new Request
-            {
-                Requesttypeid =1,
-                Isurgentemailsent= new BitArray(1, false),
-                Status=1,
-                Firstname =info.f_first_name,
-                Lastname =info.f_last_name,
-                Email = info.f_email,
-                Phonenumber = info.f_phone_number,
-                Createddate= info.Createddate,
-            };
-            _context.Requests.Add(request);
-            _context.SaveChanges();
+           
             User user = new User
             {
                 Firstname = info.p_first_name,
@@ -372,6 +391,20 @@ namespace WebApplication2.Controllers
             };
             _context.Users.Add(user);
             _context.SaveChanges();
+            Request request = new Request
+            {
+                Requesttypeid = 1,
+                Userid = user.Userid,
+                Isurgentemailsent = new BitArray(1, false),
+                Status = 1,
+                Firstname = info.f_first_name,
+                Lastname = info.f_last_name,
+                Email = info.f_email,
+                Phonenumber = info.f_phone_number,
+                Createddate = info.Createddate,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
             Requestclient requestclient = new Requestclient
             {
                 Requestid = request.Requestid,
@@ -386,6 +419,19 @@ namespace WebApplication2.Controllers
             };
             _context.Requestclients.Add(requestclient);
             await _context.SaveChangesAsync();
+            var file = info.File;
+            var uniqueFileName = Path.GetFileName(file.FileName);
+            var uploads = Path.Combine("wwwroot", "uploads");
+            var filePath = Path.Combine(uploads, uniqueFileName);
+            file.CopyTo(new FileStream(filePath, FileMode.Create));
+            var addrequestfile = new Requestwisefile
+            {
+                Createddate = DateTime.Now,
+                Filename = uniqueFileName,
+                Requestid = request.Requestid
+            };
+            _context.Requestwisefiles.Add(addrequestfile);
+            _context.SaveChanges();
             return RedirectToAction(nameof(patientlogin), "Home");
         }
 
@@ -441,6 +487,7 @@ namespace WebApplication2.Controllers
                 Requesttypeid = 1,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
+                Userid=user.Userid,
                 Firstname = info.cname,
                 Lastname = info.clname,
                 Email = info.cemail,
@@ -511,7 +558,7 @@ namespace WebApplication2.Controllers
             else
             {
                 HttpContext.Session.SetString("Usarname", userobj.Usarname);
-                HttpContext.Session.SetString("Usarname", userobj.Usarname);
+                HttpContext.Session.SetString("UsarEmail", userobj.Email);
                 return RedirectToAction(nameof(patientdashboard), "Home");
             }  
         }
