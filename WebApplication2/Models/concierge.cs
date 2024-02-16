@@ -32,9 +32,10 @@ namespace WebApplication2.Models
         [Required(ErrorMessage = "patient phone number name is required.")]
         public string Phonenumber { get; set; } = null!;
         public string? Street { get; set; }
+        public DateOnly dob { get; set; }
         public string? City { get; set; } 
         public string? State { get; set; } 
-        
+        public string? Zip { get; set; }    
         public string? p_zip_code { get; set; }
     }
 }

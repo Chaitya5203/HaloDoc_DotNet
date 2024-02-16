@@ -12,6 +12,7 @@ namespace WebApplication2.Models
         public string f_phone_number { get; set; } = null!;
         [Required(ErrorMessage = "Email is required.")]
         public string f_email { get; set; } = null!;
+        public DateOnly dob { get; set; }
         public DateTime Createddate { get; set; }= DateTime.Now;
         [Required(ErrorMessage = "patient First Name is required.")]
         public string p_first_name { get; set; } = null!;

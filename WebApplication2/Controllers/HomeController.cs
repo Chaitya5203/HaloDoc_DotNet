@@ -21,8 +21,8 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> document( int id)
         {
 
-
-            TempData["req_id"] = id;
+            HttpContext.Session.SetInt32("req_id", id);
+            
                 //HttpContext.Session.SetString("req_id", id.ToString());
                 return _context.Requestwisefiles != null ?
                           View(_context.Requestwisefiles.Where(m => m.Requestid == id).ToList()) : Problem("vchgvytfvtv");
@@ -113,6 +113,8 @@ namespace WebApplication2.Controllers
             var userData = _context.Users.FirstOrDefault(m => m.Firstname == HttpContext.Session.GetString("Usarname"));
             var requestData = _context.Requests.Where(m => m.Userid == userData.Userid).ToList();
 
+
+            DateOnly date = DateOnly.Parse(DateTime.Parse(userData.Intdate + userData.Strmonth + userData.Intyear).ToString("dd-MM-yyyy"));
             Dictionary<int, int> requestIdCounts = new Dictionary<int, int>();
             foreach (var request in requestData)
             {
@@ -126,6 +128,7 @@ namespace WebApplication2.Controllers
                 
             profile.Request = requestData;
             profile.User = userData;
+            profile.DOB = date;
 
             return View(profile);
         }

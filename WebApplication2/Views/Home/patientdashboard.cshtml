@@ -175,7 +175,73 @@
 
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        
+        <!--Location Modal -->
+
+@*         <div class="modal" id="myModal1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <section>
+                        <div class="mapouter">
+                            <div class="gmap_canvas">
+                                <iframe width="600" height="500" id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+
+                                    <!-- </iframe><a href="https://123movies-to.org">123 movies</a><br> -->
+                                    <style>
+                                        .mapouter {
+                                            position: relative;
+                                            text-align: right;
+                                            height: 500px;
+                                            width: 600px;
+                                        }</style>
+                                    <!-- <a href="https://www.embedgooglemap.net">embedgooglemap.net</a> -->
+                                    <style>
+                                        .gmap_canvas {
+                                            overflow: hidden;
+                                            background: none !important;
+                                            height: 500px;
+                                            width: 600px;
+                                        }
+                                    </style>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div> *@
+
+        <div class="modal" id="myModal1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <section>
+                        <div class="mapouter">
+                            <div class="gmap_canvas">
+                                <iframe width="600" height="500" id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+
+                                    <!-- </iframe><a href="https://123movies-to.org">123 movies</a><br> -->
+                                    <style>
+                                        .mapouter {
+                                            position: relative;
+                                            text-align: right;
+                                            height: 500px;
+                                            width: 600px;
+                                        }</style>
+                                    <!-- <a href="https://www.embedgooglemap.net">embedgooglemap.net</a> -->
+                                    <style>
+                                        .gmap_canvas {
+                                            overflow: hidden;
+                                            background: none !important;
+                                            height: 500px;
+                                            width: 600px;
+                                        }
+                                    </style>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Button trigger modal -->
         <div class="tab-pane container active" id="dashboard">
             <div class="container mx-0">
@@ -190,6 +256,7 @@
                                 </button>
                             </a>
                         </div>
+                        <form asp-action="Updateprofile" asp-controller="Aspnetusers" method="post" id="enable">
                         <div class="container  rounded bg-white shadow py-3">
 
                             @* <h6 class="text-muted">Patient Name</h6> *@
@@ -204,7 +271,7 @@
                                     <label for="exampleFormControlInput1" class="form-label ps-4">last name </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                                    <input type="date" name="dob" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
+                                    <input type="date" asp-format="{0:yyyy-MM-dd}" asp-for="DOB" class="form-control" disabled id="exampleFormControlInput1" placeholder="Date Of Birth">
                                     <label for="exampleFormControlInput1" class="form-label ps-4">Date Of Birth</label>
                                 </div>
                             </div>
@@ -246,36 +313,83 @@
                                     Location Information
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6 form-floating  mb-3 text-muted">
-                                    <input value="@Model.User.Street" type="text" name="street" class="form-control" id="exampleFormControlInput1" placeholder="Street" disabled>
+                                    <input value="@Model.User.Street" type="text" name="street" class="form-control" id="street" placeholder="Street" disabled>
                                     <label for="exampleFormControlInput1" class="form-label ps-4">Street</label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                                    <input value="@Model.User.City" type="text" name="city" class="form-control" id="exampleFormControlInput1" disabled placeholder="City">
+                                    <input value="@Model.User.City" type="text" name="city" class="form-control" id="city" disabled placeholder="City">
                                     <label for="exampleFormControlInput1" class="form-label ps-4">City</label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
-                                    <input value="@Model.User.State" type="text" name="state" class="form-control" disabled id="exampleFormControlInput1" placeholder="State">
+                                    <input value="@Model.User.State" type="text" name="state" class="form-control" disabled id="state" placeholder="State">
                                     <label for="exampleFormControlInput1" class="form-label ps-4">State</label>
                                 </div>
                                 <div class="col-sm-12 col-md-4 col-xl-4  form-floating mb-3 text-muted">
-                                    <input value="@Model.User.Zip" type="text" name="zipcode" class="form-control" disabled id="exampleFormControlInput1" placeholder="Zip Code">
+                                    <input value="@Model.User.Zip" type="text" name="zipcode" class="form-control" disabled id="zipcode" placeholder="Zip Code">
                                     <label for="exampleFormControlInput1" class="form-label ps-4">Zip Code</label>
                                 </div>
-                                <div class="col-2 mb-3">
-                                    <button class="btn btn-white border-info text-info " id="inp2"><i class="fa-solid fa-location-dot me-1"></i>Map</button>
-                                </div>
+
+                                    @* <a class="form-floating col-sm-1 mt-3 ms-3" style="cursor:pointer;display: flex; align-items: center;height: 59px;width: 86px;justify-content: center;border: 1px solid #00ccff;border-radius:7px;text-decoration: none; " id="openBtn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00ccff"
+                                             class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                        </svg>
+                                        <span style="color: #00ccff;margin-left: 4px;">Map</span>
+                                    </a>
+ *@
+                                    <div class="col-2 ">
+                                        <a class="btn btn-white border-info text-info" id="openBtn"><i class="fa-solid fa-location-dot me-1"></i>Map</a>
+                                      </div>
+                                @* <div class="col-2 mb-3">
+                                        <a class="btn btn-white border-info text-info " id="openBtn"><i class="fa-solid fa-location-dot me-1"></i>Map</a>
+                                </div> *@
                             </div>
                             
                             <div class="text-end pb-3">
-                                <button class="btn btn-info me-2 text-white" type="button">Edit</button>
+                                <button class="btn btn-info me-2 text-white" onclick="enbledata()" type="button">Edit</button>
+                                    <button class="btn btn-info me-2 text-white"  type="submit">Save</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="tab-pane container fade" id="profile">this is Profile tab</div>
         </div>
         <script>
+
+
+            $(document).ready(function () {
+                $("#openBtn").click(function () {
+                    $("#myModal1").modal("show");
+                    var Street = $("#street").val();
+                    var City = $("#city").val();
+                    var State = $("#state").val();
+                    var ZipCode = $("#zipcode").val();
+                    var address = "https://maps.google.com/maps?q=" + Street + City + State + ZipCode + "&t=&z=13&ie=UTF8&iwloc=&output=embed";
+                    $("#gmap_canvas").attr("src", address);
+                });
+            });
+            // $(document).ready(function () {
+            //     $("#openBtn").click(function () {
+            //         $("#myModal1").modal("show");
+            //         var Street = $("#street").val();
+            //         var City = $("#city").val();
+            //         var State = $("#state").val();
+            //         var ZipCode = $("#zipcode").val();
+            //         var address = "https://maps.google.com/maps?q=" + Street + City + State + ZipCode + "&t=&z=13&ie=UTF8&iwloc=&output=embed";
+            //         $("#gmap_canvas").attr("src", address);
+            //     });
+            // });
+
+            // $(document).ready(function () {
+            //     $("#closeBtn1").click(function () {
+            //         $("#myModal1").modal("hide");
+            //     });
+            // });
+
+
             function changeTheme() {
                 if ($('#light-theme').css('display') == 'none') {
                     document.querySelector(".login-bg").style.display = "block";
@@ -300,6 +414,12 @@
                 }
                 else {
                     temp.type = "password";
+                }
+            }
+            function enbledata() {
+                var formelements = document.getElementById("enable").elements;
+                for (var i = 0; i < formelements.length; i++) { 
+                    formelements[i].disabled = false;
                 }
             }
         </script>

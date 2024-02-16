@@ -2,12 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using WebApplication2.Data;
 using WebApplication2.Models;
 
@@ -157,7 +161,7 @@ namespace WebApplication2.Controllers
 
                 Requestwisefile reqclient = new Requestwisefile
                 {
-                    Requestid = (int)TempData["req_id"],
+                    Requestid = (int)HttpContext.Session.GetInt32("req_id"),
                     Filename = fileToUpload.FileName,
                     Createddate = DateTime.Now,
                 };
@@ -187,7 +191,7 @@ namespace WebApplication2.Controllers
         {
 
 
-            var filesRow = _context.Requestwisefiles.Where(u => u.Requestid == (int)TempData["req_id"]).ToList();
+            var filesRow = _context.Requestwisefiles.Where(u => u.Requestid == (int)HttpContext.Session.GetInt32("req_id")).ToList();
             MemoryStream ms = new MemoryStream();
             using (ZipArchive zip = new ZipArchive(ms, ZipArchiveMode.Create, true))
                 filesRow.ForEach(file =>
@@ -204,10 +208,65 @@ namespace WebApplication2.Controllers
             return File(ms.ToArray(), "application/zip", "download.zip");
         }
 
+        /// Update Profile 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+    
+        public async Task<IActionResult> Updateprofile(Userdata info)
+        {
+            var updatedata = await _context.Aspnetusers.FirstOrDefaultAsync(m=>m.Email==HttpContext.Session.GetString("UsarEmail"));
+            var updatdata1 = await _context.Users.FirstOrDefaultAsync(m => m.Email == HttpContext.Session.GetString("UsarEmail"));
+            if (!ModelState.IsValid)
+            {
+                    //return View("../Home/patientdashboard", info);
+            }
+
+            updatedata.Usarname = info.first_name;
+            updatedata.Passwordhash = info.last_name;
+            updatedata.Email = info.email;
+            updatedata.Createddate = info.Createddate;
+
+            updatdata1.Firstname = info.first_name;
+            updatdata1.Lastname = info.last_name;
+            updatdata1.Lastname = info.last_name;
+            updatdata1.Email = info.email;
+            updatdata1.Mobile = info.phonenumber;
+            updatdata1.Street = info.street;
+            updatdata1.City = info.city;
+            updatdata1.City = info.city;
+            updatdata1.State = info.state;
+            updatdata1.Createddate = info.Createddate;
+
+            _context.Aspnetusers.Update(updatedata);
+            _context.Users.Update(updatdata1);
+            await _context.SaveChangesAsync();
+            
+            //User user = new User
+            //{
+            //    Firstname = info.first_name,
+            //    Lastname = info.last_name,
+            //    Email = info.email,
+            //    Mobile = info.phonenumber,
+            //    Street = info.street,
+            //    City = info.city,
+            //    State = info.state,
+            //    Aspnetuserid = updatedata.Id,
+            //    Createdby = info.Createddate.ToShortDateString(),
+            //    Createddate = info.Createddate
+            //};
+            //_context.Users.Update(user);
+            //await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(patientdashboard), "Home");
+        }
+
+
         //Create Patient By It Self 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> CreatePatient(Userdata info)
         {
             var temp = 0;
@@ -217,6 +276,13 @@ namespace WebApplication2.Controllers
             {
                 return View("../Home/patient", info);
             }
+
+            int Year = info.dob.Year;
+            int Date = info.dob.Day;
+            System.Globalization.DateTimeFormatInfo dateformat = new System.Globalization.DateTimeFormatInfo();
+            var Month = dateformat.GetMonthName(info.dob.Month).ToString();
+
+
             if (userobj == null)                 
             {
                 Aspnetuser aspuser = new Aspnetuser
@@ -240,11 +306,23 @@ namespace WebApplication2.Controllers
                 City = info.city,
                 State = info.state,
                 Aspnetuserid = temp,
+                Intdate = Date,
+                Intyear = Year,
+                Strmonth = Month,
+                Zip=info.zipcode,
+                //IntYear = model.BirthDate.Year,
+                //StrMonth = (model.BirthDate.Month).ToString("MMM"),
+                //Intyear = info.IntYear
+                //Intdate = info.dob.Day,
+                //Strmonth = info.dob.ToString(),
+
+
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+
             Request request = new Request
             {
                 Requesttypeid = 1,
@@ -270,6 +348,9 @@ namespace WebApplication2.Controllers
                 Regionid = 1,
                 Street = info.street,
                 City = info.city,
+                Intdate = info.dob.Day,
+                Intyear = info.dob.Year,
+                Strmonth = info.dob.Month.ToString(),
                 Zipcode = info.zipcode
             };
             _context.Requestclients.Add(requestclient);
@@ -301,6 +382,10 @@ namespace WebApplication2.Controllers
             {
                 return View("../Home/business",info);
             }
+            int Year = info.dob.Year;
+            int Date = info.dob.Day;
+            System.Globalization.DateTimeFormatInfo dateformat = new System.Globalization.DateTimeFormatInfo();
+            var Month = dateformat.GetMonthName(info.dob.Month).ToString();
             Aspnetuser aspuser = new Aspnetuser
             {
                 Usarname = info.first_name,
@@ -315,11 +400,15 @@ namespace WebApplication2.Controllers
                 Firstname = info.p_first_name,
                 Lastname = info.p_last_name,
                 Email = info.p_email,
+                Zip = info.p_zip_code,
                 Mobile = info.p_phone,
                 Street = info.p_street,
                 City = info.p_city,
                 State = info.p_state,
                 Aspnetuserid = aspuser.Id,
+                Intdate = Date,
+                Intyear = Year,
+                Strmonth = Month,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
@@ -348,6 +437,9 @@ namespace WebApplication2.Controllers
                 Phonenumber = info.p_phone,
                 Regionid = 1,
                 Street = info.p_street,
+                Intdate = Date,
+                Intyear = Year,
+                Strmonth = Month,
                 City = info.p_city,
                 Zipcode = info.p_zip_code
             };
@@ -366,6 +458,10 @@ namespace WebApplication2.Controllers
             {
                 return View("../Home/familyfriend", info);
             }
+            int Year = info.dob.Year;
+            int Date = info.dob.Day;
+            System.Globalization.DateTimeFormatInfo dateformat = new System.Globalization.DateTimeFormatInfo();
+            var Month = dateformat.GetMonthName(info.dob.Month).ToString();
             Aspnetuser aspuser = new Aspnetuser
             {
                 Usarname = info.p_first_name,
@@ -381,11 +477,15 @@ namespace WebApplication2.Controllers
                 Firstname = info.p_first_name,
                 Lastname = info.p_last_name,
                 Email = info.p_email,
+                Zip = info.p_zip,
                 Mobile = info.p_phonenumber,
                 Street = info.p_street,
                 City = info.p_city,
                 State = info.p_state,
                 Aspnetuserid = aspuser.Id,
+                Intdate = Date,
+                Intyear = Year,
+                Strmonth = Month,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
@@ -411,6 +511,9 @@ namespace WebApplication2.Controllers
                 Firstname = info.p_first_name,
                 Lastname = info.p_last_name,
                 Email = info.f_email,
+                Intdate = Date,
+                Intyear = Year,
+                Strmonth = Month,
                 Phonenumber = info.p_phonenumber,
                 Regionid = 1,
                 Street = info.p_street,
@@ -445,6 +548,12 @@ namespace WebApplication2.Controllers
             {
                 return View("../Home/concierge", info);
             }
+
+            int Year = info.dob.Year;
+            int Date = info.dob.Day;
+            System.Globalization.DateTimeFormatInfo dateformat = new System.Globalization.DateTimeFormatInfo();
+            var Month = dateformat.GetMonthName(info.dob.Month).ToString();
+
             Concierge c = new Concierge
             {
                 Conciergename = info.cname,
@@ -475,7 +584,11 @@ namespace WebApplication2.Controllers
                 Street = info.Street,
                 City = info.City,
                 State = info.State,
+                //Zip=info.Zip,
                 Aspnetuserid = aspuser.Id,
+                Intdate = Date,
+                Intyear = Year,
+                Strmonth = Month,
                 Createdby = info.Createddate.ToShortDateString(),
                 Createddate = info.Createddate
             };
@@ -501,6 +614,9 @@ namespace WebApplication2.Controllers
                 Requestid = request.Requestid,
                 Firstname = info.first_name,
                 Lastname = info.last_name,
+                Intdate = Date,
+                Intyear = Year,
+                Strmonth =Month,
                 Email = info.pemail,
                 Phonenumber = info.Phonenumber,
                 Regionid = 1,

@@ -15,7 +15,7 @@ namespace WebApplication2.Models
         [Required(ErrorMessage = "Street is required.")]
         public string? street { get; set; }
         [Required(ErrorMessage = "dob is required.")]
-        public string? dob { get; set; }
+        public DateOnly dob { get; set; }
         [Required(ErrorMessage = "room Number is required.")]
         public string? room { get; set; }
         [Required(ErrorMessage = "city name is required.")]

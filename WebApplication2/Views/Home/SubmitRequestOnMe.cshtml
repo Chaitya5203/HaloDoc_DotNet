@@ -26,6 +26,42 @@
     </a>
 </div>
 
+<!--Location Modal -->
+
+<div class="modal" id="myModal1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <section>
+                <div class="mapouter">
+                    <div class="gmap_canvas">
+                        <iframe width="600" height="500" id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+
+                            <!-- </iframe><a href="https://123movies-to.org">123 movies</a><br> -->
+                            <style>
+                                .mapouter {
+                                    position: relative;
+                                    text-align: right;
+                                    height: 500px;
+                                    width: 600px;
+                                }</style>
+                            <!-- <a href="https://www.embedgooglemap.net">embedgooglemap.net</a> -->
+                            <style>
+                                .gmap_canvas {
+                                    overflow: hidden;
+                                    background: none !important;
+                                    height: 500px;
+                                    width: 600px;
+                                }
+                            </style>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
 <form method="post" asp-action="SubmitRequestOnMe" asp-controller="Aspnetusers">
     <div class="container bg-white rounded mt-3">
         <div class="row">
@@ -74,22 +110,22 @@
             <div class="col-12 h3 mb-3">
                 Patient Location
             </div>
-            <div class="col-sm-12 col-md-6 col-xl-6 form-floating  mb-3 text-muted">
+            <div class="col-sm-12 col-md-6 col-xl-6 form-floating  mb-3 text-muted " id="street">
                 <input asp-for=street type="text" name="street" class="form-control" id="exampleFormControlInput1" placeholder="Street">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Street</label>
                 <span asp-validation-for="street" class="text-danger"></span>
             </div>
-            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted" id="city">
                 <input asp-for=city type="text" name="city" class="form-control" id="exampleFormControlInput1" placeholder="City">
                 <label for="exampleFormControlInput1" class="form-label ps-4">City</label>
                 <span asp-validation-for="city" class="text-danger"></span>
             </div>
-            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted" id="state">
                 <input asp-for=state type="text" name="state" class="form-control" id="exampleFormControlInput1" placeholder="State">
                 <label for="exampleFormControlInput1" class="form-label ps-4">State</label>
                 <span asp-validation-for="state" class="text-danger"></span>
             </div>
-            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted" id="zipcode">
                 <input asp-for=zipcode type="text" name="zipcode" class="form-control" id="exampleFormControlInput1" placeholder="Zip Code">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Zip Code</label>
                 <span asp-validation-for="zipcode" class="text-danger"></span>
@@ -99,9 +135,17 @@
                 <label for="exampleFormControlInput1" class="form-label ps-4">Room # / (Suite Optional)</label>
                 <span asp-validation-for="room" class="text-danger"></span>
             </div>
-            <div class="col-sm-12 col-md-6 col-xl-6 mb-3">
+            <a class="form-floating col-sm-1 ms-3" style="cursor:pointer;display: flex; align-items: center;height: 59px;width: 86px;justify-content: center;border: 1px solid #00ccff;border-radius:7px;text-decoration: none; " id="openBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00ccff"
+                     class="bi bi-geo-alt" viewBox="0 0 16 16">
+                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                </svg>
+                <span style="color: #00ccff;margin-left: 4px;">Map</span>
+            </a>
+            @* <div class="col-sm-12 col-md-6 col-xl-6 mb-3">
                 <button class="btn btn-white border-info text-info " id="inp2"><i class="fa-solid fa-location-dot me-1"></i>Map</button>
-            </div>
+            </div> *@
         </div>
         <div class="row">
             <div class="col h3 mb-3">
@@ -129,6 +173,24 @@
     <div class=" text-white">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
 </footer>
 <script>
+    $(document).ready(function () {
+        $("#openBtn").click(function () {
+            $("#myModal1").modal("show");
+            var Street = $("#street").val();
+            var City = $("#city").val();
+            var State = $("#state").val();
+            var ZipCode = $("#zipcode").val();
+            var address = "https://maps.google.com/maps?q=" + Street + City + State + ZipCode + "&t=&z=13&ie=UTF8&iwloc=&output=embed";
+            $("#gmap_canvas").attr("src", address);
+        });
+    });
+    $(document).ready(function () {
+        $("#closeBtn1").click(function () {
+            $("#myModal1").modal("hide");
+        });
+    });
+
+
     window.addEventListener('DOMContentLoaded', () => {
         // var btn = document.querySelector('.hello');
         // btn.click();
