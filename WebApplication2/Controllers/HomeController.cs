@@ -18,6 +18,10 @@ namespace WebApplication2.Controllers
             _logger = logger;
             _context = context;
         }
+        //public IActionResult admindashboard()
+        //{
+        //    return View();
+        //}
         public async Task<IActionResult> document( int id)
         {
 

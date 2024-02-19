@@ -112,17 +112,26 @@ nav ul:first-child li:first-child{
     margin-right: auto;
 }
 .hide{
-    display: none;
+    display: none !important;
 }
 @media only screen and (max-width : 768px) {
-    .hideonmobile{
-        
-        display: none;
+    .hideonmobile {
+        display: none !important;
     }
-    .showonmobile{
-        display: block;
+
+    .showonmobile {
+        display: block !important;
     }
 }
+/*@media only screen and (max-width : 768px) {
+    .hideonmobile{
+        
+        display: none !important;
+    }
+    .showonmobile{
+        display: block !important;
+    }
+}*/
 .nav-item .active{
     color:#54d4d3 !important;
     border: 0 !important;
