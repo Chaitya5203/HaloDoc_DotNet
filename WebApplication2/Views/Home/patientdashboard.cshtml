@@ -89,9 +89,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                 <td><a asp-action="document" asp-controller="Home" asp-route-id="@item.Requestid"><button class="btn btn-white" style="border-color: #54d4d3; color: #54d4d3;">(@ViewBag.RequestIdCounts[item.Requestid])Document</button></a></td>
                              </tr>
-                            
                         }
-                      
                         @* <tr>
                             <td>Feb 05,2023</td>
                             <td>Processing</td>
@@ -281,11 +279,9 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                     <div class="mb-3 border border-light rounded-5">
-                                        <select class="form-select p-3 pla1" aria-label=".form-select-lg example">
-                                            <option selected>Dropdown</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="form-select p-3 pla1" aria-label=".form-select-lg example" disabled>
+                                            <option selected value="1">Mobile</option>
+                                            <option value="2">Email</option>
                                         </select>
                                     </div>
                                 </div>

@@ -8,7 +8,12 @@
         overflow: hidden;
     }
 }
-
+.circlefa {
+    display: inline-block;
+    border-radius: 60px; 
+    border:2px solid cyan; 
+    padding: 0.5em 0.6em;
+}
 
 .moonbtn {
     height: 40px;
@@ -48,19 +53,27 @@
     z-index: 1;
     background: transparent;
 }
-.bg1{
-    background: url('../OneDrive_2024-01-17/SRS Screen Shorts/11116016_415.jpg');
-    background-size: 400px 100vh;
-    background-repeat: no-repeat;
-    width: 360px;
+.bg1 {
+    max-width: 100vw;
     height: 100%;
-    opacity: 0.3;
+    background-image: url('../OneDrive_2024-01-17/SRS Screen Shorts/11116016_415.jpg');
+    /*background-size: cover;
+    background-repeat: no-repeat;*/
+    /* width: 360px;
+    height: 100%;*/
+    /*opacity: 0.3;
     left: 0;
     right: 0;
     margin: auto;
     position: absolute;
+    z-index: -999;*/ /*
+    background-image: url("login-img.jpg");*/
+    background-position: center;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    position: absolute;
     z-index: -999;
-
 }
 .footerset{
   position: absolute;

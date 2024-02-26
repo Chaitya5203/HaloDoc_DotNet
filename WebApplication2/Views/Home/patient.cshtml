@@ -2,6 +2,15 @@
 @{
     ViewData["Title"] = "patient Page";
 }
+<style>
+    .iti{
+        width: 100%;
+    }
+    #phone{
+        height: 58px;
+    }
+</style>
+
 <header id="hearder" class="shadow bg-white w-100 top-0">
     <div class="row mx-0">
         <div class="col mx-0">
@@ -97,9 +106,9 @@
                 <span asp-validation-for="last_name" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input asp-for=dob type="date" name="dob" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
+                <input asp-for=dob type="date" name="dob" class="form-control" id="dob" placeholder="Date Of Birth">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Date Of Birth</label>
-                <span asp-validation-for="dob" class="text-danger"></span>
+                <span asp-validation-for="dob" class="text-danger"></span>  
             </div>
         </div>
         <div class="row">
@@ -107,18 +116,18 @@
                 Patient Contact Information
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" >
-                <input name="email" type="email" class="form-control" id="email" onblur ="emailExists()" placeholder="Firstname">
+                <input asp-for="email" name="email" type="email" class="form-control" id="email" onblur ="emailExists()" placeholder="Firstname">
                 <label for="email" class="form-label ps-4">Email</label>
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
-            @* <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input asp-for="Mobile" id="phone" class="form-control inp2" type="tel" placeholder="Phone Number">
-            </div> *@
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                <input asp-for="phonenumber" id="phone" class="form-control inp2" type="tel" placeholder="Phone Number">
+            </div>
+            @* <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
                 <input asp-for=phonenumber name="phonenumber" type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label  for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
                 <span asp-validation-for="phonenumber" class="text-danger"></span>
-            </div>
+            </div> *@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted" style="display:none;" id="pwd_div">
@@ -204,7 +213,18 @@
 <footer class="text-center justify-content-center bg-black mt-2 ">
     <div class=" text-white">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
 </footer>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
 <script>
+
+
+    const inputDate = document.getElementById('dob');
+    const today = new Date().toISOString().split('T')[0];
+    inputDate.setAttribute('max', today);
+
     function emailExists() {
         var email = document.getElementById("email").value;
         fetch('/Home/patient/' + email)

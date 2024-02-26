@@ -2,6 +2,16 @@
 @{
     ViewData["Title"] = "concierge Page";
 }
+<style>
+    .iti {
+        width: 100%;
+    }
+
+    #phone,#phone1 {
+        height: 58px;
+    }
+</style>
+
 <header id="hearder" class="shadow bg-white w-100 top-0">
     <div class="row mx-0">
         <div class="col mx-0">
@@ -52,10 +62,14 @@
                 <span asp-validation-for="clname" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                <input asp-for="cphone" id="phone" class="form-control inp2" type="tel" placeholder="Phone Number">
+                <span asp-validation-for="cphone" class="text-danger"></span>
+            </div>
+            @* <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
                 <input asp-for=cphone type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
                 <span asp-validation-for="cphone" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
                 <input asp-for=cemail name="cemail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
                 <label for="exampleFormControlInput1" class="form-label ps-4"> Your Email</label>
@@ -116,7 +130,7 @@
                 <span asp-validation-for="last_name" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
-                <input asp-for="dob" name="dob" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date Of Birth">
+                <input asp-for="dob" name="dob" type="date" class="form-control" id="dob" placeholder="Date Of Birth">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Date Of Birth</label>
             </div>
         </div>
@@ -130,10 +144,14 @@
                 <span asp-validation-for="pemail" class="text-danger"></span>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                <input asp-for="Phonenumber" id="phone1" class="form-control inp2" type="tel" placeholder="Phone Number">
+                <span asp-validation-for="Phonenumber" class="text-danger"></span>
+            </div>
+            @* <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
                 <input asp-for=Phonenumber type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
                 <label for="exampleFormControlInput1" class="form-label ps-4">Phone Number</label>
                 <span asp-validation-for="Phonenumber" class="text-danger"></span>
-            </div>
+            </div> *@
         </div>
         <div class="row">
             <div class="col-12 h3 mb-3">
@@ -153,3 +171,33 @@
 <footer class="text-center justify-content-center bg-black mt-2 ">
     <div class="text-white">Terms Of Conditions <div class="vr "></div> Privacy Policy</div>
 </footer>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+<script>
+    const input = document.querySelector("#phone");
+    const input2 = document.querySelector("#phone1");
+    const button = document.querySelector("#btn");
+    const errorMsg = document.querySelector("#error-msg");
+    const validMsg = document.querySelector("#valid-msg");
+
+    // here, the index maps to the error code returned from getValidationError - see readme
+    const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    // initialise plugin
+    const iti = window.intlTelInput(input, {
+        initialCountry: "us",
+        utilsScript: "/intl-tel-input/js/utils.js?1706723638591"
+    });
+    const iti1 = window.intlTelInput(input2, {
+        initialCountry: "us",
+        utilsScript: "/intl-tel-input/js/utils.js?1706723638591"
+    });
+
+
+    const inputDate = document.getElementById('dob');
+    const today = new Date().toISOString().split('T')[0];
+    inputDate.setAttribute('max', today);
+</script>

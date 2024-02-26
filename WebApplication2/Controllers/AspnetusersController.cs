@@ -5,6 +5,8 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -49,7 +51,6 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
-
             return View(aspnetuser);
         }
 
@@ -59,13 +60,15 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitRequestOnMe(Userdata info)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("UsarEmail"));
             if (!ModelState.IsValid)
             {
                 return View("../Home/SubmitRequestOnMe", info);
             }
             Request request = new Request
             {
-                Requesttypeid = 1,
+                Requesttypeid = 2,
+                Userid = user.Userid,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
                 Firstname = info.first_name,
@@ -91,6 +94,20 @@ namespace WebApplication2.Controllers
             };
             _context.Requestclients.Add(requestclient);
             await _context.SaveChangesAsync();
+
+            var file = info.File;
+            var uniqueFileName = Path.GetFileName(file.FileName);
+            var uploads = Path.Combine("wwwroot", "uploads");
+            var filePath = Path.Combine(uploads, uniqueFileName);
+            file.CopyTo(new FileStream(filePath, FileMode.Create));
+            var addrequestfile = new Requestwisefile
+            {
+                Createddate = DateTime.Now,
+                Filename = uniqueFileName,
+                Requestid = request.Requestid
+            };
+            _context.Requestwisefiles.Add(addrequestfile);
+            _context.SaveChanges();
             return RedirectToAction(nameof(patientdashboard), "Home");
         }
 
@@ -103,7 +120,7 @@ namespace WebApplication2.Controllers
             }
             Request request = new Request
             {
-                Requesttypeid = 1,
+                Requesttypeid = 3,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
                 Firstname = info.f_first_name,
@@ -133,7 +150,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadFile(IFormFile fileToUpload)
+        public IActionResult UploadFile(int id,IFormFile fileToUpload)
         {
             if (fileToUpload != null && fileToUpload.Length > 0)
             {
@@ -161,7 +178,7 @@ namespace WebApplication2.Controllers
 
                 Requestwisefile reqclient = new Requestwisefile
                 {
-                    Requestid = (int)HttpContext.Session.GetInt32("req_id"),
+                    Requestid = id,
                     Filename = fileToUpload.FileName,
                     Createddate = DateTime.Now,
                 };
@@ -176,9 +193,7 @@ namespace WebApplication2.Controllers
                 // User did not select a file
                 return RedirectToAction(nameof(patientdashboard), "Home");
             }
-
         }
-
         //download File 
         public async Task<IActionResult> DownloadFile(int id)
         {
@@ -187,11 +202,11 @@ namespace WebApplication2.Controllers
             var bytes = System.IO.File.ReadAllBytes(filepath);
             return File(bytes, "application/octet-stream", file.Filename);
         }
-        public IActionResult DownloadAll()
+        public IActionResult DownloadAll(int id)
         {
 
 
-            var filesRow = _context.Requestwisefiles.Where(u => u.Requestid == (int)HttpContext.Session.GetInt32("req_id")).ToList();
+            var filesRow = _context.Requestwisefiles.Where(u => u.Requestid == id).ToList();
             MemoryStream ms = new MemoryStream();
             using (ZipArchive zip = new ZipArchive(ms, ZipArchiveMode.Create, true))
                 filesRow.ForEach(file =>
@@ -227,7 +242,6 @@ namespace WebApplication2.Controllers
             updatedata.Passwordhash = info.last_name;
             updatedata.Email = info.email;
             updatedata.Createddate = info.Createddate;
-
             updatdata1.Firstname = info.first_name;
             updatdata1.Lastname = info.last_name;
             updatdata1.Lastname = info.last_name;
@@ -325,7 +339,7 @@ namespace WebApplication2.Controllers
 
             Request request = new Request
             {
-                Requesttypeid = 1,
+                Requesttypeid = 2,
                 Userid = user.Userid,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
@@ -373,11 +387,34 @@ namespace WebApplication2.Controllers
         }
         //Businesss Data Store On Business Page 
 
+        public IActionResult patientforgot()
+        {
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> patientforgot(forgot info)
+        {
+            var mail = "tatva.dotnet.binalmalaviya@outlook.com";
+            var password = "binal@2002";
+            var receiver = info.email;
+            var subject = "Reset Password";
+            var message = "Reset Your Password: https://localhost:7050/Home";
 
+            var client = new SmtpClient("smtp.office365.com", 587)
+            {
+                EnableSsl = true,
+                Credentials = new NetworkCredential(mail, password)
+            };
+
+            client.SendMailAsync(new MailMessage(from: mail, to: receiver, subject, message));
+            return RedirectToAction(nameof(patientlogin), "Home");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatientByBusiness(BusinessPatientRequest info)
         {
+            Aspnetuser aspuser = _context.Aspnetusers.FirstOrDefault(m => m.Email == info.p_email);
             if (!ModelState.IsValid)
             {
                 return View("../Home/business",info);
@@ -386,15 +423,35 @@ namespace WebApplication2.Controllers
             int Date = info.dob.Day;
             System.Globalization.DateTimeFormatInfo dateformat = new System.Globalization.DateTimeFormatInfo();
             var Month = dateformat.GetMonthName(info.dob.Month).ToString();
-            Aspnetuser aspuser = new Aspnetuser
+
+            if (aspuser == null)
             {
-                Usarname = info.first_name,
-                Passwordhash = info.last_name,
-                Email = info.email,
-                Phonenumber = info.phone,
-            };
-            _context.Aspnetusers.Add(aspuser);
-            _context.SaveChanges();
+                var receiver = info.p_email;
+                var subject = "Create Account";
+                var message = "Tap on link for Create Account: https://localhost:7050/Home/create_patient";
+                var mail = "chaityamehta522003@gmail.com";
+                var password = "iwbc edlf rgpt oucs";
+
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential(mail, password)
+                };
+                client.SendMailAsync(new MailMessage(from: mail, to: receiver, subject, message));
+            }
+            if (aspuser == null)
+            {
+                Aspnetuser aspuser1 = new Aspnetuser
+                {
+                    Usarname = info.first_name,
+                    Passwordhash = info.last_name,
+                    Email = info.email,
+                    Phonenumber = info.phone,
+                };
+                aspuser = aspuser1;
+                _context.Aspnetusers.Add(aspuser);
+                _context.SaveChanges();
+            }
             User user = new User
             {
                 Firstname = info.p_first_name,
@@ -414,6 +471,17 @@ namespace WebApplication2.Controllers
             };
             _context.Users.Add(user);
             _context.SaveChanges();
+
+            Business business = new Business()
+            {
+                Name = info.first_name + ' ' + info.last_name,
+                Phonenumber = info.phone,
+                Createdby = info.Createddate.ToShortDateString(),
+                Createddate = info.Createddate,
+            };
+            _context.Businesses.Add(business);
+            _context.SaveChanges();
+
             Request request = new Request
             {
                 Requesttypeid = 1,
@@ -445,6 +513,15 @@ namespace WebApplication2.Controllers
             };
             _context.Requestclients.Add(requestclient); 
             await _context.SaveChangesAsync();
+
+            Requestbusiness requestbusiness = new Requestbusiness
+            {
+                Requestid = request.Requestid,
+                Businessid = business.Businessid,
+            };
+            _context.Requestbusinesses.Add(requestbusiness);
+            _context.SaveChanges();
+
             return RedirectToAction(nameof(patientlogin), "Home");
         }
 
@@ -454,6 +531,7 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatientByFamilyFriend(FamilyFriendPatientRequest info)
         {
+            Aspnetuser aspuser = _context.Aspnetusers.FirstOrDefault(m => m.Email == info.p_email);
             if (!ModelState.IsValid)
             {
                 return View("../Home/familyfriend", info);
@@ -462,16 +540,35 @@ namespace WebApplication2.Controllers
             int Date = info.dob.Day;
             System.Globalization.DateTimeFormatInfo dateformat = new System.Globalization.DateTimeFormatInfo();
             var Month = dateformat.GetMonthName(info.dob.Month).ToString();
-            Aspnetuser aspuser = new Aspnetuser
+
+            if (aspuser == null)
             {
-                Usarname = info.p_first_name,
-                Passwordhash = info.p_last_name,
-                Email = info.p_email,
-                Phonenumber = info.p_phonenumber
-            };
-            _context.Aspnetusers.Add(aspuser);
-            _context.SaveChanges();
-           
+                var receiver = info.p_email;
+                var subject = "Create Account";
+                var message = "Tap on link for Create Account: https://localhost:7050/Home/create_patient";
+                var mail = "chaityamehta522003@gmail.com";
+                var password = "iwbc edlf rgpt oucs";
+
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential(mail, password)
+                };
+                client.SendMailAsync(new MailMessage(from: mail, to: receiver, subject, message));
+            }
+            if (aspuser == null)
+            {
+                Aspnetuser aspuser1 = new Aspnetuser
+                {
+                    Usarname = info.p_first_name,
+                    Passwordhash = info.p_last_name,
+                    Email = info.p_email,
+                    Phonenumber = info.p_phonenumber,
+                };
+                aspuser = aspuser1;
+                _context.Aspnetusers.Add(aspuser1);
+                _context.SaveChanges();
+            }
             User user = new User
             {
                 Firstname = info.p_first_name,
@@ -493,7 +590,7 @@ namespace WebApplication2.Controllers
             _context.SaveChanges();
             Request request = new Request
             {
-                Requesttypeid = 1,
+                Requesttypeid = 3,
                 Userid = user.Userid,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
@@ -544,18 +641,47 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatientByConcierge(ConciergePatientRequest info)
         {
+            Aspnetuser aspuser = _context.Aspnetusers.FirstOrDefault(m => m.Email == info.pemail);
+            if (aspuser == null)
+            {
+                var receiver = info.pemail;
+                var subject = "Create Account";
+                var message = "Tap on link for Create Account: https://localhost:7050/Home/create_patient";
+                var mail = "chaityamehta522003@gmail.com";
+                var password = "iwbc edlf rgpt oucs";
+
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential(mail, password)
+                };
+                client.SendMailAsync(new MailMessage(from: mail, to: receiver, subject, message));
+            }
             if (!ModelState.IsValid)
             {
                 return View("../Home/concierge", info);
             }
-
             int Year = info.dob.Year;
             int Date = info.dob.Day;
             System.Globalization.DateTimeFormatInfo dateformat = new System.Globalization.DateTimeFormatInfo();
             var Month = dateformat.GetMonthName(info.dob.Month).ToString();
-
-            Concierge c = new Concierge
+            if (aspuser == null)
             {
+                Aspnetuser aspuser1 = new Aspnetuser
+                {
+                    Usarname = info.first_name,
+                    Passwordhash = info.last_name,
+                    Email = info.pemail,
+                    Phonenumber = info.Phonenumber,
+                };
+                aspuser = aspuser1;
+                _context.Aspnetusers.Add(aspuser);
+                await _context.SaveChangesAsync();
+            }
+
+
+             Concierge c = new Concierge
+             {
                 Conciergename = info.cname,
                 Regionid = 1,
                 Zipcode = info.czip,
@@ -563,18 +689,11 @@ namespace WebApplication2.Controllers
                 City = info.ccity,
                 State = info.cstate,
                 Createddate = info.Createddate
-            };
+             };
             _context.Concierges.Add(c);
             await _context.SaveChangesAsync();
-            Aspnetuser aspuser = new Aspnetuser
-            {
-                Usarname = info.first_name,
-                Passwordhash = info.last_name,
-                Email = info.pemail,
-                Phonenumber = info.Phonenumber,
-            };
-            _context.Aspnetusers.Add(aspuser);
-            await _context.SaveChangesAsync();
+            
+
             User user = new User
             {
                 Firstname = info.first_name,
@@ -597,7 +716,7 @@ namespace WebApplication2.Controllers
 
             Request request = new Request
             {
-                Requesttypeid = 1,
+                Requesttypeid = 4,
                 Isurgentemailsent = new BitArray(1, false),
                 Status = 1,
                 Userid=user.Userid,
@@ -626,6 +745,14 @@ namespace WebApplication2.Controllers
             };
             _context.Requestclients.Add(requestclient);
             await _context.SaveChangesAsync();
+
+            Requestconcierge requestconcierge = new Requestconcierge
+            {
+                Requestid = request.Requestid,
+                Conciergeid = c.Conciergeid
+            };
+            _context.Requestconcierges.Add(requestconcierge);
+            _context.SaveChanges();
             return RedirectToAction(nameof(patientlogin), "Home");
         }
 
@@ -662,10 +789,13 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Usarname,Passwordhash")] Aspnetuser aspnetuser)
+        public async Task<IActionResult> Create([Bind("Usarname,Passwordhash")] login aspnetuser)
         {
-            var userobj = await _context.Aspnetusers
-            .FirstOrDefaultAsync(m => m.Usarname == aspnetuser.Usarname && m.Passwordhash == aspnetuser.Passwordhash);
+            if (!ModelState.IsValid)
+            {
+                return View("../Home/patientlogin", aspnetuser);
+            }
+            var userobj = await _context.Aspnetusers.FirstOrDefaultAsync(m => m.Email == aspnetuser.Usarname && m.Passwordhash == aspnetuser.Passwordhash);
             if (userobj == null)
             {
                
@@ -674,7 +804,9 @@ namespace WebApplication2.Controllers
             else
             {
                 HttpContext.Session.SetString("Usarname", userobj.Usarname);
-                HttpContext.Session.SetString("UsarEmail", userobj.Email);
+                HttpContext.Session.SetString("UsarEmail", userobj.Email); 
+                HttpContext.Session.SetString("Isheader", "unset");
+
                 return RedirectToAction(nameof(patientdashboard), "Home");
             }  
         }
@@ -737,7 +869,6 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
-
             var aspnetuser = await _context.Aspnetusers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (aspnetuser == null)
@@ -747,7 +878,6 @@ namespace WebApplication2.Controllers
 
             return View(aspnetuser);
         }
-
         // POST: Aspnetusers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -762,11 +892,9 @@ namespace WebApplication2.Controllers
             {
                 _context.Aspnetusers.Remove(aspnetuser);
             }
-            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool AspnetuserExists(int id)
         {
           return (_context.Aspnetusers?.Any(e => e.Id == id)).GetValueOrDefault();

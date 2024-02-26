@@ -25,10 +25,12 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> document( int id)
         {
 
-            HttpContext.Session.SetInt32("req_id", id);
-            
-                //HttpContext.Session.SetString("req_id", id.ToString());
-                return _context.Requestwisefiles != null ?
+            //HttpContext.Session.SetInt32("req_id", id);
+
+            ViewBag.Id = id;
+
+            //HttpContext.Session.SetString("req_id", id.ToString());
+            return _context.Requestwisefiles != null ?
                           View(_context.Requestwisefiles.Where(m => m.Requestid == id).ToList()) : Problem("vchgvytfvtv");
         }
         public IActionResult Index()
@@ -114,11 +116,11 @@ namespace WebApplication2.Controllers
             //var aspnetuser = await _context.Aspnetusers.FirstOrDefaultAsync(m => m.Usarname == TempData["Usarname"]);
             //var user = await _context.Users.FirstOrDefaultAsync(m => m.Aspnetuserid == aspnetuser.Id );
             //return _context.Requests != null ? View(await _context.Requests/*.Where(m => m.Userid == user.Userid)*/.ToListAsync()) : Problem("No data");
-            var userData = _context.Users.FirstOrDefault(m => m.Firstname == HttpContext.Session.GetString("Usarname"));
+            var userData = _context.Users.FirstOrDefault(m => m.Email == HttpContext.Session.GetString("UsarEmail"));
             var requestData = _context.Requests.Where(m => m.Userid == userData.Userid).ToList();
 
 
-            DateOnly date = DateOnly.Parse(DateTime.Parse(userData.Intdate + userData.Strmonth + userData.Intyear).ToString("dd-MM-yyyy"));
+            DateOnly date = DateOnly.Parse(DateTime.Parse(userData.Intdate + userData.Strmonth + userData.Intyear).ToString("yyyy-MM-dd"));
             Dictionary<int, int> requestIdCounts = new Dictionary<int, int>();
             foreach (var request in requestData)
             {
@@ -126,10 +128,7 @@ namespace WebApplication2.Controllers
                 requestIdCounts.Add(request.Requestid, count);
             }
             ViewBag.RequestIdCounts = requestIdCounts;
-
             profile profile = new();
-
-                
             profile.Request = requestData;
             profile.User = userData;
             profile.DOB = date;

@@ -1,0 +1,15 @@
+﻿namespace WebApplication2.Models
+{
+    public class requestclientvisedata
+    {
+        public string Notes { get; set; }
+
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public DateTime DOB { get; set; }
+        public string Phonenumber { get; set; }
+        public string Email { get; set; }
+        public string RegionName { get; internal set; }
+        public string Address { get; set; }
+    }
+}

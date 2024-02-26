@@ -18,8 +18,68 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\pce96\source\repos\WebApplication2 - Copy\WebApplication2
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Access.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/admindashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cYWRtaW5kYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Myprofile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTXlwcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Partner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFydG5lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Provider.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvdmlkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Providerlocation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvdmlkZXJsb2NhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Record.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVjb3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/View_Case.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld19DYXNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/View_Note.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld19Ob3RlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Active.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX0FjdGl2ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Adminprofile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX0FkbWlucHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Conclude.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX0NvbmNsdWRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX05ldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Pending.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1BlbmRpbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Toclose.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1RvY2xvc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Unpaid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1VucGFpZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Aspnetusers/Create.cshtml]
@@ -109,6 +169,10 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Shared/_AdminHeader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkhlYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-qy506dh6t2
 
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s

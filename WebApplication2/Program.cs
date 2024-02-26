@@ -5,7 +5,6 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationContext>();
-
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".AdventureWorks.Session";
