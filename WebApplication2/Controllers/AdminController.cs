@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 using WebApplication2.Data;
 using WebApplication2.Models;
 namespace WebApplication2.Controllers
@@ -28,25 +29,30 @@ namespace WebApplication2.Controllers
 
             return View();
         }
-   
-
-        public IActionResult View_Case(int id)
+        public async Task<ActionResult> View_Case(int id)
         {
-            var data = _context.Requestclients.FirstOrDefault(m => m.Requestid == id);
-            //var region = _context.Regions.FirstOrDefault(m => m.Regionid == data.Regionid);
+            //return View();
+            var data = await _context.Requestclients.FirstOrDefaultAsync(m => m.Requestid == id);
+            DateOnly date = DateOnly.Parse(DateTime.Parse(data.Intyear + data.Strmonth + data.Intdate).ToString("yyyy-MM-dd"));
+            var region = await _context.Regions.FirstOrDefaultAsync(m => m.Regionid == data.Regionid);
             requestclientvisedata model = new();
             model.FName = data.Firstname;
             model.LName = data.Lastname;
-            model.DOB = DateTime.Now;
+            model.DOB = date; 
             model.Notes = data.Notes;
             model.Phonenumber = data.Phonenumber;
             model.Email = data.Email;
-            //model.RegionName = region.Name;
+            model.RegionName = region.Name  ;
             model.Address = data.Street + " " + data.City + " " + data.State + " " + data.Zipcode;
-
-
             return View(model);
-            //return View(_context.Requestclients.FirstOrDefault(m => m.Requestid == id));
+        }
+        public IActionResult Adminlogin()
+        {
+            return View();
+        }
+        public IActionResult Adminforgot()
+        {
+            return View();
         }
         public IActionResult View_Note()
         {
@@ -55,7 +61,6 @@ namespace WebApplication2.Controllers
         public IActionResult Access()
         {
             return View();
-
         }
         public IActionResult Provider()
         {
@@ -83,37 +88,70 @@ namespace WebApplication2.Controllers
             return PartialView("Adminprofile");
         }
         [HttpPost]
-        public ActionResult New( int id)
+        public ActionResult New( int id,int check)
         {
-            var data = from t1 in _context.Requests
-                       join t2 in _context.Requestclients on t1.Requestid equals t2.Requestid
-                       join t3 in _context.Requesttypes on t1.Requesttypeid equals t3.Requesttypeid
-                       where t1.Status == id
-                       select new
-                       {
-                           t1.Requestid,
-                           t1.Requesttypeid,
-                           t1.Firstname,
-                           t1.Lastname,
-                           t2.Intdate,
-                           t2.Strmonth,
-                           t2.Intyear,
-                           t1.Phonenumber,
-                           t2.Street,
-                           t2.City,
-                           t2.Notes,
-                           t1.Createddate,
-                           t3.Name
-                       };
-            if(id == 1)            return PartialView("_New", data);
-            if(id == 2)            return PartialView("_Pending", data);
-            if(id == 3)            return PartialView("_Active", data);
-            if(id == 4)            return PartialView("_Conclude", data);
-            if(id == 5)            return PartialView("_Toclose", data);
-            if(id == 6)            return PartialView("_Unpaid", data);
-            else          return PartialView("_New", data);
+            IQueryable data;
+            if(check == 0)
+            {
+                data = from t1 in _context.Requests
+                join t2 in _context.Requestclients on t1.Requestid equals t2.Requestid
+                join t3 in _context.Requesttypes on t1.Requesttypeid equals t3.Requesttypeid
+                where t1.Status == id
+                select new
+                {
+                    t1.Requestid,    
+                    t1.Requesttypeid,
+                    t1.Firstname,
+                    t1.Lastname,
+                    t2.Intdate,
+                    t2.Strmonth,
+                    t2.Intyear,
+                    t1.Phonenumber,
+                    t2.Street,
+                    t2.City,
+                    t2.Notes,
+                    t1.Createddate,
+                    t3.Name
+                };
+            }
+            else
+            {
+                data = from t1 in _context.Requests
+                join t2 in _context.Requestclients on t1.Requestid equals t2.Requestid
+                join t3 in _context.Requesttypes on t1.Requesttypeid equals t3.Requesttypeid
+                where t1.Status == id && t1.Requesttypeid == check
+                select new
+                {
+                    t1.Requestid,
+                    t1.Requesttypeid,
+                    t1.Firstname,
+                    t1.Lastname,
+                    t2.Intdate,
+                    t2.Strmonth,
+                    t2.Intyear,
+                    t1.Phonenumber,
+                    t2.Street,
+                    t2.City,
+                    t2.Notes,
+                    t1.Createddate,
+                    t3.Name
+                };
+            }
+            if(id == 1) 
+                return PartialView("_New", data);
+            if(id == 2) 
+                return PartialView("_Pending", data);
+            if(id == 3) 
+                return PartialView("_Active", data);
+            if(id == 4) 
+                return PartialView("_Conclude", data);
+            if(id == 5) 
+                return PartialView("_Toclose", data);
+            if(id == 6) 
+                return PartialView("_Unpaid", data);
+            else 
+                return PartialView("_New", data);
         }
-
         //[HttpPost]
         //public ActionResult NavigationTabs(int id)
         //{

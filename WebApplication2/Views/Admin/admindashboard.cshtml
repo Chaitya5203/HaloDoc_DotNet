@@ -12,113 +12,8 @@
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
 
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "/Admin/New",
-            type: "POST",
-            data: {'id' : 1},
-            dataType: "html",
-            success: function (data) {
-                $("#tableContent").html(data);
-            },
-            error: function () {
-                alert("No Projects Found");
-                $("#tableContent").html('An error has occurred');
-            }
-        });
-        $('#new-box').click(function () {
-            $.ajax({
-                url: "/Admin/New",
-                type: "POST",
-                data: { 'id': 1 },
-                dataType: "html",
-                success: function (data) {
-                    $("#tableContent").html(data);
-                },
-                error: function () {
-                    alert("No Projects Found");
-                    $("#tableContent").html('An error has occurred');
-                }
-            });
-        });
-        $('#pending-box').click(function () {
-            $.ajax({
-                url: "/Admin/New",
-                type: "POST",
-                data: { 'id': 2 },
-                dataType: "html",
-                success: function (data) {
-                    $("#tableContent").html(data);
-                },
-                error: function () {
-                    alert("No Projects Found");
-                    $("#tableContent").html('An error has occurred');
-                }
-            });
-        });
-        $('#active-box').click(function () {
-            $.ajax({
-                url: "/Admin/New",
-                data: { 'id': 3},
-                type: "POST",
-                dataType: "html",
-                success: function (data) {
-                    $("#tableContent").html(data);
-                },
-                error: function () {
-                    alert("No Projects Found");
-                    $("#tableContent").html('An error has occurred');
-                }
-            });
-        });
-        $('#conclude-box').click(function () {
-            $.ajax({
-                url: "/Admin/New",
-                type: "POST", 
-                data: { 'id': 4 },
-                dataType: "html",
-                success: function (data) {
-                    $("#tableContent").html(data);
-                },
-                error: function () {
-                    alert("No Projects Found");
-                    $("#tableContent").html('An error has occurred');
-                }
-            });
-        });
-        $('#close-box').click(function () {
-            $.ajax({
-                url: "/Admin/New",
-                data: { 'id': 5},
-                type: "POST",
-                dataType: "html",
-                success: function (data) {
-                    $("#tableContent").html(data);
-                },
-                error: function () {
-                    alert("No Projects Found");
-                    $("#tableContent").html('An error has occurred');
-                }
-            });
-        });
-        $('#unpaid-box').click(function () {
-            $.ajax({
-                url: "/Admin/New",
-                type: "POST",
-                data: { 'id': 6},
-                dataType: "html",
-                success: function (data) {
-                    $("#tableContent").html(data);
-                },
-                error: function () {
-                    alert("No Projects Found");
-                    $("#tableContent").html('An error has occurred');
-                }
-            });
-        });
-    });
-</script>
+
+
 <style>
     .iti {
         width: 100%;
@@ -127,7 +22,6 @@
         height: 58px;
     }
 </style>
-
 <nav class="bg-white">
     <div class="container-fluid  shadow p-0" style="z-index:1060; padding-left :0px !important;">
         <ul style="padding-left :0px !important;">
@@ -297,54 +191,11 @@
                     </button>
                 </div>
             </div>
-            <div class="row mt-3 d-flex flex-row">
-                <div class="text-end d-md-flex hideonmobile justify-content-md-end ">
-                    <h5 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(New)</span></h5>
-                    <button class="btn btn-info ms-1 text-white" type="button"><i class="fa-regular fa-paper-plane me-1"></i><small>Send Link</small></button>
-                    <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky me-1"></i><small> Requests</small></button>
-                    <button class="btn btn-info ms-1 text-white" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export</small></button>
-                    <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export All</small></button>
-                    <button class="btn btn-info text-white ms-1" type="button"><i class="fa-regular fa-user me-1"></i><small>Request DTY Support</small></button>
-                </div>
-                <div class="text-end d-md-flex showonmobile hide justify-content-md-end ">
-                    <h6 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(New)</span></h6>
-                    <button class="btn btn-info ms-1 p-1 text-white" type="button"><i class="fa-regular fa-paper-plane"></i></button>
-                    <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button>
-                    <button class="btn btn-info p-1 ms-1 text-white" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
-                    <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
-                    <button class="btn btn-info p-1 text-white ms-1" type="button"><i class="fa-regular fa-user"></i></button>
-                </div>
-            </div>
-            <div class="w-100 d-flex flex-column">
-
-                <div class="row g-2 mt-2 pt-2 pb-3 bg-white shadow rounded-1">
-                    <div class="col-lg-2 col-md-6 col-sm-12">
-                        <i class="fa fa-search text-muted position-absolute" style="padding-top:10px; padding-left:10px;"></i>
-                        <input type="search" class="form-control" style="padding-left:35px;" id="floatingInputGrid" placeholder="Search Patients">
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-sm-12">
-                        <select class="form-select" id="floatingSelectGrid">
-                            <option selected>All Regions</option>
-                            <option value="1">Surat</option>
-                            <option value="2">Ahmedabad</option>
-                            <option value="3">Anand</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-8 col-md-12 col-sm-12">
-                        <div class="text-end d-md-flex justify-content-md-end ">
-                            <button class="hideonmobile btn btn-white" style="border-color:gainsboro;" type="button">All</button>
-                            <span class="p-2 border-info" type="button"><i class="fa-solid fa-circle fa-xs me-2" style="color: #3ecc4e;"></i>Patient</span>
-                            <span class="p-2" type="button"><i class="fa-solid fa-circle fa-xs me-2" style="color: #FFD43B;"></i>Family/Freind</span>
-                            <span class="p-2 border-info" type="button"><i class="fa-solid fa-circle fa-xs me-2" style="color: #DA6679;"></i>Business</span>
-                            <span class=" p-2 " type="button"><i class="fa-solid fa-circle fa-xs me-2" style="color: #3c5bd7;"></i>Concierge</span>
-                            <span class="p-2 " type="button"><i class="fa-solid fa-circle fa-xs me-2" style="color: #6d4bd2;"></i>VIP</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="">
                 <div id="tableContent" class="table-responsive">
 
                 </div>
-               <div class="accordion showonmobile hide mt-3" id="accordionExample">
+               @* <div class="accordion showonmobile hide mt-3" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
                             <div class="container-fluid accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -417,36 +268,140 @@
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Accordion Item #2
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Accordion Item #3
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-            </div>
-        </div>
-    </div>
+               </div> *@
 </div>
 </div>
 </div>
 <div class="tab-pane fade" id="providerlocation" role="tabpanel" aria-labelledby="provider-location-tab">fsdf</div>
-<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">.sdfs.</div>
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between mt-3">
+                    <h4 class="mt-3">My Profile</h4>
+                    @* <a asp-action="PatientDashboard" asp-controller="Home"><button class="theme-btn-header px-1 mt-3 mb-3 " style="height: 40px; width : 80px; color: #54B4D3;">< Back</button></a> *@
+                    <a class="text-start text-info text-decoration-none ">
+                        <button class="btn btn-white  text-info border-info rounded ">
+                            <i class="fa-solid  fa-less-than"></i> Back
+                        </button>
+                    </a>
+                </div>
+                <form method="post" id="enable">
+                    <div class="container rounded bg-white shadow py-3">
+                        <h5 class="mb-3">Account Information</h5>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input name="first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">User Name</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input name="last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">Password </label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6">
+                                <div class="mb-3 border border-light rounded-5">
+                                    <select class="form-select p-3 pla1" aria-label=".form-select-lg example">
+                                        <option selected value="1">Mobile</option>
+                                        <option value="2">Email</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6">
+                                <div class="mb-3 border border-light rounded-5">
+                                    <select class="form-select p-3 pla1" aria-label=".form-select-lg example">
+                                        <option selected value="1">Mobile</option>
+                                        <option value="2">Email</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end pb-3">
+                            <button class="btn btn-white text-info border-info" type="button">Reset password</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 h5 mb-3">
+                                Administrator Information
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input name="first_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Firstname">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">Firstname</label>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input name="last_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lastname">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">Lastname</label>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                                <label for="email" class="form-label ps-4">Email</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input name="cemail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Confirm Email">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">Confirm Email</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input id="phone" class="form-control inp2" type="tel" placeholder="Phone Number">
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">District Of Columbia</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">New York</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox3">Virginia</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                                    <label class="form-check-label" for="inlineCheckbox4">Maryland</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end pb-3">
+                            <button class="btn btn-info text-white" onclick="enbledata()" type="button">Edit</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 h5 mb-3">
+                                Mailing & Billing Information
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input type="text" name="Address-1" class="form-control" id="Address-1" placeholder="Address 1">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">Address 1</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input type="text" name="Address-2" class="form-control" id="Address-2" placeholder="Address 2">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">Address 2</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+                                <input type="text" name="city" class="form-control" id="city" placeholder="City">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">City</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+                                <input type="text" name="state" class="form-control" id="state" placeholder="State">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">State</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6  form-floating mb-3 text-muted">
+                                <input type="text" name="zipcode" class="form-control" id="zipcode" placeholder="Zip Code">
+                                <label for="exampleFormControlInput1" class="form-label ps-4">Zip Code</label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-xl-6 form-floating mb-3 text-muted">
+                                <input id="phone1" class="form-control inp2" type="tel" placeholder="Phone Number">
+                            </div>
+                        </div>
+                        <div class="text-end pb-3">
+                            <button class="btn btn-info text-white" onclick="enbledata()" type="button">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="tab-pane fade" id="providers" role="tabpanel" aria-labelledby="providers-tab">.fdfgg..</div>
 <div class="tab-pane fade" id="partners" role="tabpanel" aria-labelledby="partners-tab">..fff.</div>
 <div class="tab-pane fade" id="access" role="tabpanel" aria-labelledby="Accedss-tab">.ddd..</div>
@@ -475,5 +430,111 @@
         utilsScript: "/intl-tel-input/js/utils.js?1706723638591"
     });
 </script>
-
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Admin/New",
+            type: "POST",
+            data: { 'id': 1 , 'check' : 0},
+            dataType: "html",
+            success: function (data) {
+                $("#tableContent").html(data);
+            },
+            error: function () {
+                alert("No Projects Found");
+                $("#tableContent").html('An error has occurred');
+            }
+        });
+        $('#new-box').click(function () {
+            $.ajax({
+                url: "/Admin/New",
+                type: "POST",
+                data: { 'id': 1 , 'check' : 0},
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+        $('#pending-box').click(function () {
+            $.ajax({
+                url: "/Admin/New",
+                type: "POST",
+                data: { 'id': 2 , 'check' : 0},
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+        $('#active-box').click(function () {
+            $.ajax({
+                url: "/Admin/New",
+                data: { 'id': 3 , 'check' : 0},
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+        $('#conclude-box').click(function () {
+            $.ajax({
+                url: "/Admin/New",
+                type: "POST",
+                data: { 'id': 4 , 'check' : 0},
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+        $('#close-box').click(function () {
+            $.ajax({
+                url: "/Admin/New",
+                data: { 'id': 5 , 'check' : 0},
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+        $('#unpaid-box').click(function () {
+            $.ajax({
+                url: "/Admin/New",
+                type: "POST",
+                data: { 'id': 6 , 'check' : 0},
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+    });
+</script>
 

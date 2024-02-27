@@ -13,14 +13,7 @@
     <link rel="stylesheet" href="~/css/patientrequest.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/js/sprinkle.js"></script>
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/js/jquery-1.2.6.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/js/jquery-ui-personalized-1.5.2.packed.js"></script>
-    <script>
+    @* <script>
         $(document).ready(function () {
            
             $('#home-tab').click(function () {
@@ -129,11 +122,11 @@
                 });
             });
         });
-    </script>
+    </script> *@
 
 </head>
 <body>
-    <div>
+    @* <div>
         <nav class="bg-white">
             <div class="container-fluid  shadow p-0" style="z-index:1060; padding-left :0px !important;">
                 <ul style="padding-left :0px !important;">
@@ -234,15 +227,15 @@
                 <div class="offcanvasmenu p-2"><a id="accessnav" class="text-muted text-decoration-none">Access</a></div>
                 <div class="offcanvasmenu p-2"><a id="recordnav" class="text-muted text-decoration-none">Records</a></div>
             </div>
-        </div>
-        <main id="Content" role="main">
+        </div> *@
+    <div>
+        <main role="main">
             @RenderBody()
         </main>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-
+    <script src="~/js/site.js" asp-append-version="true"></script> *@
+    @* @await RenderSectionAsync("Scripts", required: false) *@
 </body>
 </html>

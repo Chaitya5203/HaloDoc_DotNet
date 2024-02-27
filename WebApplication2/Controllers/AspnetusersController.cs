@@ -805,9 +805,9 @@ namespace WebApplication2.Controllers
             {
                 HttpContext.Session.SetString("Usarname", userobj.Usarname);
                 HttpContext.Session.SetString("UsarEmail", userobj.Email); 
-                HttpContext.Session.SetString("Isheader", "unset");
+                //HttpContext.Session.SetString("Isheader", "unset");
 
-                return RedirectToAction(nameof(patientdashboard), "Home");
+                return RedirectToAction(nameof(AdminController.admindashboard), "Admin");
             }  
         }
         // POST: Aspnetusers/Create
