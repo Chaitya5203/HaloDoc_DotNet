@@ -1,8 +1,130 @@
-﻿<div class="row mt-3 d-flex flex-row">
+﻿<!-- Modal Transfer Case To Patient In Pending State-->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Transfer Request</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col text-muted">
+                        To Transfer this request,search and select another Physician.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Maryland</option>
+                        <option value="1">Surat</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label for="floatingSelect">Narrow Search By Region</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Dr Agola</option>
+                        <option value="1">Dr Agola</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label for="floatingSelect">Select physician</label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Description</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info text-white">Submit</button>
+                <button type="button" class="btn btn-white border-info text-info" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Clear Case To Patient In Pending State-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-center justify-content-center mb-3">
+                <div class="rounded-circle border border-3 p-1 border-warning shadow ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#e0bd34"
+                         class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                        <path fill="#e0bd34" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path fill="#e0bd34" d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                    </svg>
+                </div>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body mb-3 " style="text-align: center;">
+                <div>
+                    <h5 class="modal-title " id="staticBackdropLabel">Confirmation for clear case</h5>
+                </div>
+                Are sure you want to clear this request?Once clear this request then you are not able to see this request.
+            </div>
+            <div class="modal-footer d-flex justify-content-center pb-3">
+                <button type="button" class="btn btn-info text-white " data-bs-dismiss="modal">Clear</button>
+                <button type="button" class="btn btn-white text-info border-info" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Send Agreement Case To Patient In Pending State-->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Send Agreement</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col text-muted">
+                        <p>
+                            <span class="p-2 border-info" type="button"><i class="fa-solid fa-circle fa-xs me-2" style="color: #3ecc4e;"></i>Patient</span>
+                        </p>
+                        To Send Agreement Please make sure you are updating the correct contact information below for the responsible party.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" id="floatingInput" placeholder="Phone Number">
+                            <label for="floatingInput">Phone Number</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="Email address">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info text-white">Send</button>
+                <button type="button" class="btn btn-white border-info text-info" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mt-3 d-flex flex-row">
     <div class="text-end d-md-flex hideonmobile justify-content-md-end ">
         <h5 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(Pending)</span></h5>
         <button class="btn btn-info ms-1 text-white" type="button"><i class="fa-regular fa-paper-plane me-1"></i><small>Send Link</small></button>
-        <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky me-1"></i><small> Requests</small></button>
+        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin">
+            <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky me-1"></i><small> Requests</small></button>
+        </a>
         <button class="btn btn-info ms-1 text-white" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export</small></button>
         <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export All</small></button>
         <button class="btn btn-info text-white ms-1" type="button"><i class="fa-regular fa-user me-1"></i><small>Request DTY Support</small></button>
@@ -10,7 +132,8 @@
     <div class="text-end d-md-flex showonmobile hide justify-content-md-end ">
         <h6 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(New)</span></h6>
         <button class="btn btn-info ms-1 p-1 text-white" type="button"><i class="fa-regular fa-paper-plane"></i></button>
-        <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button>
+        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin"><button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button>
+        </a>
         <button class="btn btn-info p-1 ms-1 text-white" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
         <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
         <button class="btn btn-info p-1 text-white ms-1" type="button"><i class="fa-regular fa-user"></i></button>
@@ -115,15 +238,15 @@
                         <button class="btn btn-outline-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Action
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin" asp-route-id="@item.Requestid"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
                             <li><a class="dropdown-item" ><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Uploads</a></li>
 
                             <li><a class="dropdown-item" asp-action="View_Note" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/notebook.png" style="height:15px;" class="me-1" />View Notes</a></li>
-                            <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />Transfer</a></li>
-                            <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />Clear Case</a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />Transfer</a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />Clear Case</a></li>
 
-                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/Assign_case.jpg" style="height:15px;" class="me-1" />Send Agreement</a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/Assign_case.jpg" style="height:15px;" class="me-1" />Send Agreement</a></li>
                             @* <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-xmark me-1"></i>Cancel Case</a></li>
                             <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
                             
@@ -146,7 +269,7 @@
                     <div class="container-fluid accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <div class="row w-100">
                             <div class="col-6 mb-3">
-                                Patient Name
+                                @item.Firstname @item.Lastname
                             </div>
                             <div class="col-6 mb-3">
                                 @if (item.Requesttypeid == 1)
@@ -171,7 +294,7 @@
                                 }
                             </div>
                             <div class="col-6">
-                                Address
+                                @item.Street,@item.City
                             </div>
                             <div class="col-6">
                                 <button class="btn btn-white border-info text-info rounded-pill 2px">
@@ -227,8 +350,8 @@
                         </div>
                         <div class="text-end d-md-flex justify-content-md-end pb-3">
                             <span>Chat With:</span>
-                            <button class="btn btn-info  text-white me-md-2" type="button"><i class="fa-regular fa-user me-1"></i>Patient</button>
-                            <button class="btn btn-info  text-white" type="button"><i class="fa-solid fa-user-doctor me-1"></i>Provider</button>
+                            <button class="btn btn-info  text-white me-md-2" type="button"><i class="fa-regular fa-user me-1"></i><small>Patient</small></button>
+                            <button class="btn btn-info  text-white" type="button"><i class="fa-solid fa-user-doctor me-1"></i><small>Provider</small></button>
                         </div>
                     </div>
                 </div>

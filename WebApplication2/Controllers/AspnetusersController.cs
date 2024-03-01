@@ -44,7 +44,6 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
-
             var aspnetuser = await _context.Aspnetusers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (aspnetuser == null)
@@ -53,9 +52,7 @@ namespace WebApplication2.Controllers
             }
             return View(aspnetuser);
         }
-
         // Request on me page When Dashboard Is Open and request is Created 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitRequestOnMe(Userdata info)
@@ -79,7 +76,6 @@ namespace WebApplication2.Controllers
             };
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
-
             Requestclient requestclient = new Requestclient
             {
                 Requestid = request.Requestid,
@@ -94,7 +90,6 @@ namespace WebApplication2.Controllers
             };
             _context.Requestclients.Add(requestclient);
             await _context.SaveChangesAsync();
-
             var file = info.File;
             var uniqueFileName = Path.GetFileName(file.FileName);
             var uploads = Path.Combine("wwwroot", "uploads");
@@ -110,10 +105,12 @@ namespace WebApplication2.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(patientdashboard), "Home");
         }
-
-        // Request on me page When Dashboard Is Open and request is Created 
-        public async Task<IActionResult> SubmitRequestSomeone(FamilyFriendPatientRequest info)
+        // Request on someoneelse page When Dashboard Is Open and request is Created 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SubmitRequestSomeone(someoneelse info)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("UsarEmail"));
             if (!ModelState.IsValid)
             {
                 return View("../Home/SubmitRequestSomeone", info);
@@ -121,34 +118,32 @@ namespace WebApplication2.Controllers
             Request request = new Request
             {
                 Requesttypeid = 3,
-                Isurgentemailsent = new BitArray(1, false),
+                Userid = user.Userid,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Phonenumber = user.Mobile,
+                Email = user.Email,
                 Status = 1,
-                Firstname = info.f_first_name,
-                Lastname = info.f_last_name,
-                Email = info.f_email,
-                Phonenumber = info.f_phone_number,
-                Createddate = info.Createddate,
+                Relationname = info.relation,
+                Createddate = DateTime.Now,
+                Isurgentemailsent = new BitArray(1, false)
             };
             _context.Requests.Add(request);
             _context.SaveChanges();
-
-            Requestclient requestclient = new Requestclient
+            Requestclient reqclient = new Requestclient
             {
                 Requestid = request.Requestid,
                 Firstname = info.p_first_name,
                 Lastname = info.p_last_name,
-                Email = info.f_email,
                 Phonenumber = info.p_phonenumber,
-                Regionid = 1,
-                Street = info.p_street,
-                City = info.p_city,
-                Zipcode = info.p_zip
+                Email = info.p_email,
+                Location = info.p_street + "," + info.p_city + "," + info.p_state + " ," + info.p_zip,
+                Regionid = 1
             };
-            _context.Requestclients.Add(requestclient);
-            await _context.SaveChangesAsync();
+            _context.Requestclients.Add(reqclient);
+            _context.SaveChanges();
             return RedirectToAction(nameof(patientdashboard), "Home");
         }
-
         [HttpPost]
         public IActionResult UploadFile(int id,IFormFile fileToUpload)
         {
@@ -807,7 +802,7 @@ namespace WebApplication2.Controllers
                 HttpContext.Session.SetString("UsarEmail", userobj.Email); 
                 //HttpContext.Session.SetString("Isheader", "unset");
 
-                return RedirectToAction(nameof(AdminController.admindashboard), "Admin");
+                return RedirectToAction(nameof(patientdashboard), "Home");
             }  
         }
         // POST: Aspnetusers/Create

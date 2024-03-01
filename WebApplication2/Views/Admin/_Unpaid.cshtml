@@ -2,7 +2,9 @@
     <div class="text-end d-md-flex hideonmobile justify-content-md-end ">
         <h5 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(Unpaid)</span></h5>
         <button class="btn btn-info ms-1 text-white" type="button"><i class="fa-regular fa-paper-plane me-1"></i><small>Send Link</small></button>
-        <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky me-1"></i><small> Requests</small></button>
+        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin">
+            <button class="btn btn-info text-white ms-1 border-info" type="button" ><i class="fa-regular fa-note-sticky me-1"></i><small> Requests</small></button>
+        </a>
         <button class="btn btn-info ms-1 text-white" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export</small></button>
         <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export All</small></button>
         <button class="btn btn-info text-white ms-1" type="button"><i class="fa-regular fa-user me-1"></i><small>Request DTY Support</small></button>
@@ -10,7 +12,7 @@
     <div class="text-end d-md-flex showonmobile hide justify-content-md-end ">
         <h6 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(New)</span></h6>
         <button class="btn btn-info ms-1 p-1 text-white" type="button"><i class="fa-regular fa-paper-plane"></i></button>
-        <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button>
+        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin"><button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button> </a>
         <button class="btn btn-info p-1 ms-1 text-white" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
         <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
         <button class="btn btn-info p-1 text-white ms-1" type="button"><i class="fa-regular fa-user"></i></button>
@@ -102,7 +104,7 @@
                         <button class="btn btn-outline-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Action
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin" asp-route-id="@item.Requestid"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
                             <li><a class="dropdown-item"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Uploads</a></li>
 
@@ -125,7 +127,7 @@
                     <div class="container-fluid accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <div class="row w-100">
                             <div class="col-6 mb-3">
-                                Patient Name
+                                @item.Firstname @item.Lastname
                             </div>
                             <div class="col-6 mb-3">
                                 @if (item.Requesttypeid == 1)
@@ -150,7 +152,7 @@
                                 }
                             </div>
                             <div class="col-6">
-                                Address
+                                @item.Street,@item.City
                             </div>
                             <div class="col-6">
                                 <button class="btn btn-white border-info text-info rounded-pill 2px">
@@ -206,8 +208,8 @@
                         </div>
                         <div class="text-end d-md-flex justify-content-md-end pb-3">
                             <span>Chat With:</span>
-                            <button class="btn btn-info text-white me-md-2" type="button"><i class="fa-regular fa-user me-1"></i>Patient</button>
-                            <button class="btn btn-info  text-white" type="button"><i class="fa-solid fa-user-doctor me-1"></i>Provider</button>
+                            <button class="btn btn-info text-white me-md-2" type="button"><i class="fa-regular fa-user me-1"></i><small>Patient</small></button>
+                            <button class="btn btn-info  text-white" type="button"><i class="fa-solid fa-user-doctor me-1"></i><small>Provider</small></button>
                         </div>
                     </div>
                 </div>

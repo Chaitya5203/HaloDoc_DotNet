@@ -11,9 +11,6 @@
     
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
-
-
-
 <style>
     .iti {
         width: 100%;
@@ -56,49 +53,49 @@
         </ul>
         <hr>
         <ul class="nav nav-tabs hideonmobile" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
+            <li class="nav-item purpletri triangle-down" role="presentation">
                 <button class="nav-link active border-0 text-muted" id="home-tab" data-bs-toggle="tab"
                         data-bs-target="#home" type="button" role="tab" aria-controls="home"
                         aria-selected="true">
                     <b>Dashboard</b>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item purpletri triangle-down" role="presentation">
                 <button class="nav-link text-muted border-0 " id="provider-location-tab" data-bs-toggle="tab"
                         data-bs-target="#providerlocation" type="button" role="tab" aria-controls="providerlocation"
                         aria-selected="false">
                     <b>Provider Location</b>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item purpletri triangle-down" role="presentation">
                 <button class="nav-link text-muted border-0 " id="profile-tab" data-bs-toggle="tab"
                         data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
                         aria-selected="false">
                     <b>My Profile</b>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item purpletri triangle-down" role="presentation">
                 <button class="nav-link text-muted border-0 " id="providers-tab" data-bs-toggle="tab"
                         data-bs-target="#providers" type="button" role="tab" aria-controls="providers"
                         aria-selected="false">
                     <b>Providers</b>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item purpletri triangle-down" role="presentation">
                 <button class="nav-link text-muted border-0 " id="partners-tab" data-bs-toggle="tab"
                         data-bs-target="#partners" type="button" role="tab" aria-controls="partners"
                         aria-selected="false">
                     <b>Partners</b>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item purpletri triangle-down" role="presentation">
                 <button class="nav-link text-muted border-0 " id="Accedss-tab" data-bs-toggle="tab"
                         data-bs-target="#access" type="button" role="tab" aria-controls="access"
                         aria-selected="false">
                     <b>Access</b>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item purpletri triangle-down" role="presentation">
                 <button class="nav-link text-muted border-0 " id="Records-tab" data-bs-toggle="tab"
                         data-bs-target="#records" type="button" role="tab" aria-controls="records"
                         aria-selected="false">
@@ -536,5 +533,16 @@
             });
         });
     });
+
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('.statustablinks').click(function () {
+            $('.statustablinks').removeClass('active');
+            $(this).addClass('active');
+            $('.triangle-down').hide();
+            $(this).parent().find('.triangle-down').show();
+        });
+    });
+</script>

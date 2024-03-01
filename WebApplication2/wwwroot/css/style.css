@@ -150,3 +150,47 @@ nav ul:first-child li:first-child{
     border: 0 !important;
     border-bottom: 3px solid #54d4d3 !important;
 }
+/*button color-profile small state*/
+
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid;
+}
+
+
+.purpletri {
+    color: mediumslateblue;
+    display: none;
+}
+
+
+.pinktri {
+    color: #912261;
+    display: none;
+}
+
+
+.greentri {
+    color: green;
+    display: none;
+}
+
+
+.lightbluetri {
+    color: #2cc7f1;
+    display: none;
+}
+
+.darkbluetri {
+    color: darkblue;
+    display: none;
+}
+
+
+.bluetri {
+    color: #0181f8;
+    display: none;
+}

@@ -12,6 +12,5 @@
         public string Email { get; set; }
         public string RegionName { get; internal set; }
         public string Address { get; set; }
-        
     }
 }

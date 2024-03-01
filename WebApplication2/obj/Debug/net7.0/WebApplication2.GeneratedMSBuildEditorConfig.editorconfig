@@ -42,6 +42,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFydG5lci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Patientrequestadmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGF0aWVudHJlcXVlc3RhZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Provider.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvdmlkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -52,6 +56,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Record.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVjb3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/Sendorder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2VuZG9yZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/View_Case.cshtml]
@@ -72,6 +80,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Conclude.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX0NvbmNsdWRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Modalofassign.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX01vZGFsb2Zhc3NpZ24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Modalofblock.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX01vZGFsb2ZibG9jay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_Modalsofnew.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX01vZGFsc29mbmV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pce96/source/repos/WebApplication2 - Copy/WebApplication2/Views/Admin/_New.cshtml]

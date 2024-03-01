@@ -1,129 +1,13 @@
-﻿<!-- Modal Block case For Patient-->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Block</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col text-muted">
-                        Patient Name: <span class="text-info">test test</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Reason for Block Request</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info text-white">Confirm</button>
-                <button type="button" class="btn btn-white text-info border-info" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal Assign Case To Patient-->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Assign Request</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col text-muted">
-                        To Assign this request,search and select another Physician.
-                    </div>
-                </div>
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                        <option selected>Maryland</option>
-                        <option value="1">Surat</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <label for="floatingSelect">Narrow Search By Region</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                        <option selected>Dr Agola</option>
-                        <option value="1">Dr Agola</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <label for="floatingSelect">Select physician</label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Description</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info text-white">Submit</button>
-                <button type="button" class="btn btn-white border-info text-info" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal For Cancel Case For Patient-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white ">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Cancellation</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col text-muted">
-                        Patient Name: <span class="text-info">test test</span>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option selected>Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <label for="floatingSelect">Reasons For Cancellation</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Provide Additional Notes</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info text-white">Confirm</button>
-                <button type="button" class="btn btn-white border-info text-info" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
+﻿<div id="modalpopup">
+
 </div>
 <div class="row mt-3 d-flex flex-row">
     <div class="text-end d-md-flex hideonmobile justify-content-md-end ">
         <h5 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(New)</span></h5>
         <button class="btn btn-info ms-1 text-white" type="button"><i class="fa-regular fa-paper-plane me-1"></i><small>Send Link</small></button>
-        <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky me-1"></i><small> Requests</small></button>
+        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin">
+            <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky me-1"></i><small> Requests</small></button>
+        </a>
         <button class="btn btn-info ms-1 text-white" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export</small></button>
         <button class="btn btn-info text-white ms-1 border-info" type="button"><i class="fa fa-share-square me-1" aria-hidden="true"></i><small>Export All</small></button>
         <button class="btn btn-info text-white ms-1" type="button"><i class="fa-regular fa-user me-1"></i><small>Request DTY Support</small></button>
@@ -131,13 +15,12 @@
     <div class="text-end d-md-flex showonmobile hide justify-content-md-end ">
         <h6 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(New)</span></h6>
         <button class="btn btn-info ms-1 p-1 text-white" type="button"><i class="fa-regular fa-paper-plane"></i></button>
-        <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button>
+        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin"><button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button> </a>
         <button class="btn btn-info p-1 ms-1 text-white" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
         <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
         <button class="btn btn-info p-1 text-white ms-1" type="button"><i class="fa-regular fa-user"></i></button>
     </div>
 </div>
-
 <div class="row g-2 mt-2 pt-2 pb-3 bg-white shadow rounded-1">
     <div class="col-lg-2 col-md-6 col-sm-12">
         <i class="fa fa-search text-muted position-absolute" style="padding-top:10px; padding-left:10px;"></i>
@@ -208,7 +91,7 @@
                     @item.Intdate / @item.Strmonth /@item.Intyear
                 </td>
                 <td class="font">
-                    Patient @item.Firstname,@item.Lastname
+                    Patient @item.Firstname,@item.Lastname 
                 </td>
                 <td class="font">
                     @item.Createddate
@@ -229,13 +112,13 @@
                     <div class="dropdown">
                         <button class="btn btn-outline-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Action
-                        </button> 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal1" ><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/Assign_case.jpg" style="height:15px;" class="me-1" />Assign Case</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-xmark me-1"></i>Cancel Case</a></li>
-                            <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin" asp-route-id="@item.Requestid"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
-                            <li><a class="dropdown-item" asp-action="View_Note" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/notebook.png" style="height:15px;" class="me-1" />View Notes</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2" ><i class="fa fa-ban me-1 " aria-hidden="true"></i>Block Patient</a></li>
+                        </button>
+                        <ul class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton1">
+                            <li><button class="dropdown-item" onclick="assigncase(this)" value="@item.Requestid" id="assigncase"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/Assign_case.jpg" style="height:15px;" class="me-1" />Assign Case</button></li>
+                            <li><button class="dropdown-item" onclick="cancelcase(this)" value="@item.Requestid" id="cancelcase"><i class="fa-solid fa-xmark me-1"></i>Cancel Case</button></li>
+                            <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin" value="@item.Requestid"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
+                            <li><a class="dropdown-item" asp-action="View_Note" asp-controller="Admin" asp-route-id="@item.Requestid"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/notebook.png" style="height:15px;" class="me-1" />View Notes</a></li>
+                            <li><button class="dropdown-item" onclick="blockcase(this)" value="@item.Requestid" id="blockcase"><i class="fa fa-ban me-1 " aria-hidden="true"></i>Block Patient</button></li>
                         </ul>
                     </div>
                 </td>
@@ -254,7 +137,7 @@
                     <div class="container-fluid accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@i" aria-expanded="true" aria-controls="collapse_@i">
                         <div class="row w-100">
                             <div class="col-6 mb-3">
-                                Patient Name
+                                @item.Firstname @item.Lastname
                             </div>
                             <div class="col-6 mb-3">
                                 @if (item.Requesttypeid == 1)
@@ -279,7 +162,7 @@
                                 }
                             </div>
                             <div class="col-6">
-                                Address
+                                @item.Street,@item.City
                             </div>
                             <div class="col-6">
                                 <button class="btn btn-white border-info text-info rounded-pill 2px">
@@ -292,10 +175,10 @@
                 <div id="collapse_@i" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body container-fluid">
                         <p>
-                            <i class="fa-regular fa-calendar-days me-1 circlefa"></i>Date of Birth:
+                            <i class="fa-regular fa-calendar-days me-1 circlefa"></i>Date of Birth:@item.Intdate / @item.Strmonth /@item.Intyear
                         </p>
-                        <p><i class="fa-regular fa-envelope me-1 circlefa"></i>Email</p>
-                        <p><i class="fa-solid fa-phone me-1 circlefa"></i>Patient</p>
+                        <p><i class="fa-regular fa-envelope me-1 circlefa"></i>Email:</p>
+                        <p><i class="fa-solid fa-phone me-1 circlefa"></i>PhoneNumber:@item.Phonenumber</p>
                         <p><i class="fa-solid fa-book me-1 circlefa"></i>Transfer Notes</p>
                         <p><i class="fa-regular fa-calendar-days me-1 circlefa"></i>Date of Service</p>
                         <p><i class="fa-solid fa-user-doctor me-1 circlefa"></i>Physician</p>
@@ -335,8 +218,8 @@
                         </div>
                         <div class="text-end d-md-flex justify-content-md-end pb-3">
                             <span>Chat With:</span>
-                            <button class="btn btn-info  text-white me-md-2" type="button"><i class="fa-regular fa-user me-1"></i>Patient</button>
-                            <button class="btn btn-info  text-white" type="button"><i class="fa-solid fa-user-doctor me-1"></i>Provider</button>
+                            <button class="btn btn-info text-white me-md-1" type="button"><i class="fa-regular fa-user me-1"></i><small>Patient</small> </button>
+                            <button class="btn btn-info  text-white" type="button"><i class="fa-solid fa-user-doctor me-1 "></i><small>Provider</small></button>
                         </div>
                     </div>
                 </div>
@@ -346,6 +229,57 @@
     }
 </div>
 <script>
+    function blockcase(element) {
+        var id = element.value;
+        console.log(id);
+        $.ajax({
+            url: "/Admin/Modalofblock",
+            data: { 'id': id },
+            type: "GET",
+            dataType: "html",
+            success: function (data) {
+                $("#modalpopup").html(data);
+            },
+            error: function () {
+                alert("No Projects Found");
+                $("#tableContent").html('An error has occurred');
+            }
+        });
+    };
+    function cancelcase(element) {
+        var id = element.value;
+        console.log(id);
+        $.ajax({
+            url: "/Admin/Modalsofnew",
+            data: { 'id': id},
+            type: "GET",
+            dataType: "html",
+            success: function (data) {
+                $("#modalpopup").html(data);
+            },
+            error: function () {
+                alert("No Projects Found");
+                $("#tableContent").html('An error has occurred');
+            }
+        });
+    };
+    function assigncase(element) {
+        var id = element.value;
+        console.log(id);
+        $.ajax({
+            url: "/Admin/Modalofassign",
+            data: { 'id': id,'regionid':0 },
+            type: "GET",
+            dataType: "html",
+            success: function (data) {
+                $("#modalpopup").html(data);
+            },
+            error: function () {
+                alert("No Projects Found");
+                $("#tableContent").html('An error has occurred');
+            }
+        });
+    };
     $(document).ready(function () {
         $('#adminTable').DataTable({
             "initComplete": function (settings, json) {
@@ -443,6 +377,4 @@
             }
         });
     });
-
-
 </script>
