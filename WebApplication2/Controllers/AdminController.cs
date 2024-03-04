@@ -5,6 +5,7 @@ using NuGet.Versioning;
 using System.Drawing;
 using WebApplication2.Data;
 using WebApplication2.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace WebApplication2.Controllers
 {
     public class AdminController : Controller
@@ -18,22 +19,18 @@ namespace WebApplication2.Controllers
         }
         public IActionResult admindashboard()
         {
-
             //if (HttpContext.Session.GetString("Isheader") == "unset")
             //    HttpContext.Session.SetString("Isheader", "true");
             ViewBag.NewCount = _context.Requests.Where(r => r.Status == 1).Count();
-
             ViewBag.PendingCount = _context.Requests.Where(r => r.Status == 2).Count();
             ViewBag.ActiveCount = _context.Requests.Where(r => r.Status == 3).Count();
             ViewBag.ConcludeCount = _context.Requests.Where(r => r.Status == 4).Count();
             ViewBag.TocloseCount = _context.Requests.Where(r => r.Status == 5).Count();
             ViewBag.UnpaidCount = _context.Requests.Where(r => r.Status == 6).Count();
-
             return View();
         }
         public async Task<ActionResult> View_Case(int id)
         {
-            //return View();
             var data = await _context.Requestclients.FirstOrDefaultAsync(m => m.Requestid == id);
             DateOnly date = DateOnly.Parse(DateTime.Parse(data.Intyear + data.Strmonth + data.Intdate).ToString("yyyy-MM-dd"));
             var region = await _context.Regions.FirstOrDefaultAsync(m => m.Regionid == data.Regionid);
@@ -44,15 +41,19 @@ namespace WebApplication2.Controllers
             model.Notes = data.Notes;
             model.Phonenumber = data.Phonenumber;
             model.Email = data.Email;
-            model.RegionName = region.Name  ;
-            
+            model.RegionName = region.Name;
             model.Address = data.Street + " " + data.City + " " + data.State + " " + data.Zipcode;
             return View(model);
+        }
+        public IActionResult ViewUploadAdmin(int id)
+        {
+            return View();
         }
         public IActionResult Adminlogin()
         {
             return View();
         }
+        
         [HttpPost]
         public async Task<IActionResult> SaveNotes(Notes n,int id)
         {
@@ -177,69 +178,139 @@ namespace WebApplication2.Controllers
         {
             return PartialView("Adminprofile");
         }
+
         [HttpPost]
-        public ActionResult New( int id,int check)
+        //public ActionResult New(int id, int check)
+        //{
+        //    IQueryable<AdminDashboardTableModel> tabledata;
+        //    if (check == 0)
+        //    {
+        //        tabledata = from rc in _context.Requestclients
+        //                    join r in _context.Requests on rc.Requestid equals r.Requestid
+        //                    join phy in _context.Physicians on r.Physicianid equals phy.Physicianid
+        //                    join rt in _context.Requesttypes on r.Requesttypeid equals rt.Requesttypeid
+        //                    join reg in _context.Regions on rc.Regionid equals reg.Regionid
+        //                    where r.Status == id 
+        //                    orderby r.Createddate descending
+        //                    select new AdminDashboardTableModel
+        //                    {
+        //                        Name = rc.Firstname + ' ' + rc.Lastname,
+        //                        Requestor = rt.Name + " , " + r.Firstname + ' ' + r.Lastname,
+        //                        physician = "Dr. " + phy.Firstname,
+        //                        Dateofservice = r.Lastreservationdate,
+        //                        Requesteddate = r.Createddate,
+        //                        Phonenumber = rc.Phonenumber,
+        //                        Email = r.Email,
+        //                        Address = rc.Street + " , " + rc.City + " , " + rc.Street + " , " + rc.Zipcode,
+        //                        Requestid = r.Requestid,
+        //                        Notes = rc.Notes,
+        //                        RequestTypeId = r.Requesttypeid,
+        //                        RegionName = reg.Name,
+        //                        RequestTypeName = rt.Name
+        //                    };
+        //    }
+        //    else
+        //    {
+
+        //        tabledata = from rc in _context.Requestclients
+        //                    join r in _context.Requests on rc.Requestid equals r.Requestid
+        //                    join phy in _context.Physicians on r.Physicianid equals phy.Physicianid
+        //                    join rt in _context.Requesttypes on r.Requesttypeid equals rt.Requesttypeid
+        //                    join reg in _context.Regions on rc.Regionid equals reg.Regionid
+        //                    where r.Status == id && r.Requesttypeid == check
+        //                    orderby r.Createddate descending
+        //                    select new AdminDashboardTableModel
+        //                    {
+        //                        Name = rc.Firstname + ' ' + rc.Lastname,
+        //                        Requestor = rt.Name + " , " + r.Firstname + ' ' + r.Lastname,
+        //                        physician = "Dr. " + phy.Firstname,
+        //                        Dateofservice = r.Lastreservationdate,
+        //                        Requesteddate = r.Createddate,
+        //                        Phonenumber = rc.Phonenumber,
+        //                        Email = r.Email,
+        //                        Address = rc.Street + " , " + rc.City + " , " + rc.Street + " , " + rc.Zipcode,
+        //                        Requestid = r.Requestid,
+        //                        Notes = rc.Notes,
+        //                        RequestTypeId = r.Requesttypeid,
+        //                        RegionName = reg.Name,
+        //                        RequestTypeName = rt.Name
+        //                    };
+        //    }
+
+
+        //    if (id == 1)
+        //        return PartialView("_New", tabledata.ToList());
+        //    else if (id == 2) return View("_Pending", tabledata);
+        //    else if (id == 3) return View("_Active", tabledata.ToList());
+        //    else if (id == 4) return View("_Conclude", tabledata.ToList());
+        //    else if (id == 5) return View("_Toclose", tabledata);
+        //    else if (id == 6) return View("_Unpaid", tabledata.ToList());
+        //    else return View("_New", tabledata.ToList());
+        //}
+
+
+        public ActionResult New(int id, int check)
         {
             IQueryable data;
-            if(check == 0)
+            if (check == 0)
             {
                 data = from t1 in _context.Requests
-                join t2 in _context.Requestclients on t1.Requestid equals t2.Requestid
-                join t3 in _context.Requesttypes on t1.Requesttypeid equals t3.Requesttypeid
-                where t1.Status == id
-                select new
-                {
-                    t1.Requestid,    
-                    t1.Requesttypeid,
-                    t1.Firstname,
-                    t1.Lastname,
-                    t2.Intdate,
-                    t2.Strmonth,
-                    t2.Intyear,
-                    t1.Phonenumber,
-                    t2.Street,
-                    t2.City,
-                    t2.Notes,
-                    t1.Createddate,
-                    t3.Name
-                };
+                       join t2 in _context.Requestclients on t1.Requestid equals t2.Requestid
+                       join t3 in _context.Requesttypes on t1.Requesttypeid equals t3.Requesttypeid
+                       where t1.Status == id
+                       select new
+                       {
+                           t1.Requestid,
+                           t1.Requesttypeid,
+                           t1.Firstname,
+                           t1.Lastname,
+                           t2.Intdate,
+                           t2.Strmonth,
+                           t2.Intyear,
+                           t1.Phonenumber,
+                           t2.Street,
+                           t2.City,
+                           t2.Notes,
+                           t1.Createddate,
+                           t3.Name
+                       };
             }
             else
             {
                 data = from t1 in _context.Requests
-                join t2 in _context.Requestclients on t1.Requestid equals t2.Requestid
-                join t3 in _context.Requesttypes on t1.Requesttypeid equals t3.Requesttypeid
-                where t1.Status == id && t1.Requesttypeid == check
-                select new
-                {
-                    t1.Requestid,
-                    t1.Requesttypeid,
-                    t1.Firstname,
-                    t1.Lastname,
-                    t2.Intdate,
-                    t2.Strmonth,
-                    t2.Intyear,
-                    t1.Phonenumber,
-                    t2.Street,
-                    t2.City,
-                    t2.Notes,
-                    t1.Createddate,
-                    t3.Name
-                };
+                       join t2 in _context.Requestclients on t1.Requestid equals t2.Requestid
+                       join t3 in _context.Requesttypes on t1.Requesttypeid equals t3.Requesttypeid
+                       where t1.Status == id && t1.Requesttypeid == check
+                       select new
+                       {
+                           t1.Requestid,
+                           t1.Requesttypeid,
+                           t1.Firstname,
+                           t1.Lastname,
+                           t2.Intdate,
+                           t2.Strmonth,
+                           t2.Intyear,
+                           t1.Phonenumber,
+                           t2.Street,
+                           t2.City,
+                           t2.Notes,
+                           t1.Createddate,
+                           t3.Name
+                       };
             }
-            if(id == 1) 
+            if (id == 1)
                 return PartialView("_New", data);
-            if(id == 2) 
+            if (id == 2)
                 return PartialView("_Pending", data);
-            if(id == 3) 
+            if (id == 3)
                 return PartialView("_Active", data);
-            if(id == 4) 
+            if (id == 4)
                 return PartialView("_Conclude", data);
-            if(id == 5) 
+            if (id == 5)
                 return PartialView("_Toclose", data);
-            if(id == 6) 
+            if (id == 6)
                 return PartialView("_Unpaid", data);
-            else 
+            else
                 return PartialView("_New", data);
         }
         //[HttpPost]
@@ -372,7 +443,6 @@ namespace WebApplication2.Controllers
             _context.Blockrequests.Add(blockrequest);
             Request request = _context.Requests.FirstOrDefault(r => r.Requestid == id);
             request.Status = 10;
-            
             _context.Requests.Update(request);
             _context.SaveChanges();
             return RedirectToAction(nameof(admindashboard));

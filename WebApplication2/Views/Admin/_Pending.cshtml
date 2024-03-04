@@ -11,7 +11,7 @@
                     <div class="col text-muted">
                         To Transfer this request,search and select another Physician.
                     </div>
-                </div>
+                </div>                          
                 <div class="form-floating mb-3">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                         <option selected>Maryland</option>
@@ -132,7 +132,8 @@
     <div class="text-end d-md-flex showonmobile hide justify-content-md-end ">
         <h6 class="ms-2" style="position:absolute !important; left:10px !important;">Patients <span style="color:#063982">(New)</span></h6>
         <button class="btn btn-info ms-1 p-1 text-white" type="button"><i class="fa-regular fa-paper-plane"></i></button>
-        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin"><button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button>
+        <a class="text-decoration-none" asp-action="Patientrequestadmin" asp-controller="Admin">
+            <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa-regular fa-note-sticky"></i> </button>
         </a>
         <button class="btn btn-info p-1 ms-1 text-white" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
         <button class="btn btn-info p-1 text-white ms-1 border-info" type="button"><i class="fa fa-share-square" aria-hidden="true"></i></button>
@@ -240,17 +241,16 @@
                         </button>
                         <ul class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin" asp-route-id="@item.Requestid"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
-                            <li><a class="dropdown-item" ><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Uploads</a></li>
-
+                            <li><a class="dropdown-item" asp-action="ViewUploadAdmin" asp-controller="Admin" asp-route-id="@item.Requestid"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Uploads</a></li>
                             <li><a class="dropdown-item" asp-action="View_Note" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/notebook.png" style="height:15px;" class="me-1" />View Notes</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />Transfer</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />Clear Case</a></li>
 
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/Assign_case.jpg" style="height:15px;" class="me-1" />Send Agreement</a></li>
                             @* <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-xmark me-1"></i>Cancel Case</a></li>
-                            <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
-                            
-                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa fa-ban me-1 " aria-hidden="true"></i>Block Patient</a></li> *@
+                        <li><a class="dropdown-item" asp-action="View_Case" asp-controller="Admin"><img src="~/OneDrive_2024-01-17/SRS Screen Shorts/keyword.png" style="height:15px;" class="me-1" />View Case</a></li>
+
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa fa-ban me-1 " aria-hidden="true"></i>Block Patient</a></li> *@
                         </ul>
                     </div>
                 </td>
@@ -259,7 +259,7 @@
     </tbody>
 </table>
 <div class="accordion showonmobile mt-3" id="accordionExample" style="display:none">
-     @if (1 == 1)
+    @if (1 == 1)
     {
         var i = 0;
         @foreach (var item in Model)
@@ -391,7 +391,7 @@
         $.ajax({
             url: "/Admin/New",
             type: "POST",
-            data: {  'id': 2, 'check': 2 },
+            data: { 'id': 2, 'check': 2 },
             dataType: "html",
             success: function (data) {
                 $("#tableContent").html(data);
@@ -406,7 +406,7 @@
         $.ajax({
             url: "/Admin/New",
             type: "POST",
-            data: {  'id': 2, 'check': 3 },
+            data: { 'id': 2, 'check': 3 },
             dataType: "html",
             success: function (data) {
                 $("#tableContent").html(data);
@@ -420,7 +420,7 @@
     $('#businessdata').click(function () {
         $.ajax({
             url: "/Admin/New",
-            data: {  'id': 2, 'check': 1 },
+            data: { 'id': 2, 'check': 1 },
             type: "POST",
             dataType: "html",
             success: function (data) {
@@ -436,7 +436,7 @@
         $.ajax({
             url: "/Admin/New",
             type: "POST",
-            data: {  'id': 2, 'check': 4 },
+            data: { 'id': 2, 'check': 4 },
             dataType: "html",
             success: function (data) {
                 $("#tableContent").html(data);
@@ -450,7 +450,7 @@
     $('#all').click(function () {
         $.ajax({
             url: "/Admin/New",
-            data: {  'id': 2, 'check': 0 },
+            data: { 'id': 2, 'check': 0 },
             type: "POST",
             dataType: "html",
             success: function (data) {

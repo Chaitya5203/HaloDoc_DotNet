@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bW7WQwKfr2cLJjG7AOAfYp+8GhWhlpyZXWY8dS7wx4s=",
+  "Hash": "+gTYzXC6qZzjwqBetv6HOavRnCWqkY7jldRtR64Iwuo=",
   "Source": "WebApplication2",
   "BasePath": "_content/WebApplication2",
   "Mode": "Default",
@@ -4670,6 +4670,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Fig2. Forgot Password.jpgFig2. Forgot Password.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Fig21. Admin My profile..jpg",
+      "SourceId": "WebApplication2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\",
+      "BasePath": "_content/WebApplication2",
+      "RelativePath": "uploads/Fig21. Admin My profile..jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Fig21. Admin My profile..jpg"
     },
     {
       "Identity": "C:\\Users\\pce96\\source\\repos\\WebApplication2 - Copy\\WebApplication2\\wwwroot\\uploads\\Fig25. Contact your Provider.jpg",
